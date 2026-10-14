@@ -116,3 +116,21 @@ which read an SD card, and Maze, whose seed comes from upstream's clock.
 Donkey Kong's program is larger than a `.uze` may hold, and upstream's
 packrom cuts it short; its `.hex` is used. Its picture has a red pattern
 where black is expected, in upstream's uzem too.
+
+## 2026-10-14: the modifier keys are bound as Chimera reads them
+
+**Found.** Chimera hands a key to the bindings under one name only: the
+name DistinctKeyNameOverrides gives it ("Number1", "Enter", "Backtick",
+"KeypadAdd"), or else its DistinctKey name (Input.cs). By default it also
+reads the left and right Shift, Ctrl and Alt as one key each, "Shift",
+"Ctrl" and "Alt" (Config.MergeLAndRModifierKeys). A binding to any other
+name never fires, so those controls shipped unbound.
+
+**Decided.** The bindings use those names; where both keys of a modifier
+were bound, the left one is on the merged key and the right one ships
+unbound. The test `package:key-names` (`tests/check-key-names.py`) reads the
+names from Chimera's source and checks every binding.
+
+Measured: Left Shift, Left Ctrl and Left Alt were bound to LeftShift,
+LeftCtrl and LeftAlt, which a default setup never sends; they are now on
+Shift, Ctrl and Alt, and Right Shift, Right Ctrl and Right Alt ship unbound.
