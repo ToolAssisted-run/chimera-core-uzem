@@ -16,10 +16,18 @@ enum = open(gui + "/Chimera.Input/KeyMouseInput/DistinctKey.cs").read()
 enum = re.sub(r"///.*", "", enum)
 body = enum[enum.index("enum DistinctKey"):]
 body = body[body.index("{") + 1:body.index("}")]
-members = [m.split("=")[0].strip() for m in body.split(",") if m.strip()]
+# a member written "PageUp = Prior" is another name of the same key
+alias = {}
+for m in (m.strip() for m in body.split(",")):
+    if m:
+        name, _, of = (x.strip() for x in m.partition("="))
+        alias[name] = alias.get(of, of) if of else name
 over = open(gui + "/Chimera.Client.Common/input/DistinctKeyNameOverrides.cs").read()
 renamed = dict(re.findall(r"DistinctKey\.(\w+)\s*=>\s*\"([^\"]+)\"", over))
-known = {renamed.get(m, m) for m in members}
+# a key Chimera renames is known by that name alone, whichever of its names
+# the rename is written with; another key by any of its names
+renamed_keys = {alias[m]: n for m, n in renamed.items() if m in alias}
+known = {renamed_keys.get(k, m) for m, k in alias.items()}
 known |= {"WMouse L", "WMouse R", "WMouse M", "WMouse 1", "WMouse 2", "WMouse X", "WMouse Y", "RMouse X", "RMouse Y"}
 cfg = json.load(open(binds))
 bad = []
