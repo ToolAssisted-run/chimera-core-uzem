@@ -1,0 +1,175 @@
+diff --git a/tools/uzem/avr8.cpp b/tools/uzem/avr8.cpp
+index d70bd58..3049d0d 100644
+--- a/tools/uzem/avr8.cpp
++++ b/tools/uzem/avr8.cpp
+@@ -48,7 +48,9 @@ More info at uzebox.org
+     #include "gdbserver.h"
+ #endif // NOGDB
+ #include "SDEmulator.h"
++#ifndef CHIMERA_CORE
+ #include "Keyboard.h"
++#endif
+ #include "logo.h"
+ 
+ using namespace std;
+@@ -326,6 +328,9 @@ void avr8::write_io_x(u8 addr,u8 value)
+ 	case (ports::OCR2A):
+ 		if (enableSound && TCCR2B)
+ 		{
++#ifdef CHIMERA_CORE
++			chimera_sound_level(value);
++#else
+ 			// raw pcm sample at 15.7khz
+ #ifndef __EMSCRIPTEN__
+ 			while (audioRing.isFull())SDL_Delay(1);
+@@ -349,6 +354,7 @@ void avr8::write_io_x(u8 addr,u8 value)
+ 				}
+ 			}
+ #endif // __EMSCRIPTEN__
++#endif // CHIMERA_CORE
+ 		}
+ 		break;
+ 
+@@ -368,9 +374,15 @@ void avr8::write_io_x(u8 addr,u8 value)
+ 			else if (scanline_count != -999)
+ 			{
+ 
++#ifdef CHIMERA_CORE
++				if (scanline_count >= 0 && chimera_video){
++					render_line(
++						chimera_video + scanline_count * VIDEO_DISP_WIDTH,
++#else
+ 				if (scanline_count >= 0){
+ 					render_line(
+ 						(u32*)((u8*)surface->pixels + scanline_count * surface->pitch),
++#endif
+ 						&scanline_buf[0],
+ 						left_edge + left_edge_cycle,
+ 						palette);
+@@ -381,6 +393,12 @@ void avr8::write_io_x(u8 addr,u8 value)
+ 
+ 				if (scanline_count == 224)
+ 				{
++#ifdef CHIMERA_CORE
++					// the controls of the next frame are set by the core
++					// before it runs, as here SDL's events and the mouse are
++					// read; the core takes the picture
++					chimera_frame_end(this);
++#else
+ 
+ 					SDL_UpdateTexture(texture, NULL, surface->pixels, surface->pitch);
+ 					SDL_RenderClear(renderer);
+@@ -469,6 +487,7 @@ void avr8::write_io_x(u8 addr,u8 value)
+ #ifndef NOGDB
+ 					singleStep = nextSingleStep;
+ #endif // NOGDB
++#endif // CHIMERA_CORE
+ 					scanline_count = -999;
+ 				}
+ 			}
+@@ -483,6 +502,9 @@ void avr8::write_io_x(u8 addr,u8 value)
+ 
+ 		if (went_low == (1<<2))		// LATCH
+ 		{
++#ifdef CHIMERA_CORE
++			chimera_input_reads++;
++#endif
+ 			for (int i=0; i<2; i++)
+ 			{
+ 				latched_buttons[i] = buttons[i];
+@@ -2008,6 +2030,7 @@ bool avr8::init_sd()
+ }
+ 
+ 
++#ifndef CHIMERA_CORE
+ bool avr8::init_gui()
+ {
+ 	if ( SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) != 0 )
+@@ -2609,6 +2632,8 @@ void avr8::load_joystick_file(const char* filename)
+ 
+ 
+ 
++#endif // CHIMERA_CORE
++
+ #ifdef SPI_DEBUG
+ char ascii(unsigned char ch){
+     if(ch >= 32 && ch <= 127){
+@@ -3007,6 +3032,10 @@ void avr8::LoadEEPROMFile(const char* filename){
+ }
+ 
+ void avr8::shutdown(int errcode){
++#ifdef CHIMERA_CORE
++    chimera_halt(errcode);
++    return;
++#endif
+ #if defined(__WIN32__)
+     if(hDisk != INVALID_HANDLE_VALUE){
+         CloseHandle (hDisk);        
+@@ -3053,6 +3082,7 @@ void avr8::shutdown(int errcode){
+     }
+ #endif // __EMSCRIPTEN__
+ 
++#ifndef CHIMERA_CORE
+ 	if (joystickFile) {
+ 		FILE* f = fopen(joystickFile,"wb");
+ 
+@@ -3067,10 +3097,12 @@ void avr8::shutdown(int errcode){
+             fclose(f);
+         }
+ 	}
++#endif // CHIMERA_CORE
+ 
+     exit(errcode);
+ }
+ 
++#ifndef CHIMERA_CORE
+ /* This function is called from GDB while the cpu is stopped */
+ void avr8::idle(void){
+     SDL_Event event;
+@@ -3084,4 +3116,4 @@ void avr8::idle(void){
+ 
+     SDL_Delay(5);
+ }
+-
++#endif // CHIMERA_CORE
+diff --git a/tools/uzem/avr8.h b/tools/uzem/avr8.h
+index 45b643c..35db090 100644
+--- a/tools/uzem/avr8.h
++++ b/tools/uzem/avr8.h
+@@ -43,9 +43,36 @@ THE SOFTWARE.
+     #include <sys/mmap.h> // Unix memory mapped I/O
+ #endif
+ 
++#ifdef CHIMERA_CORE
++// Chimera: the core has no window, sound device or host keyboard of its own;
++// Chimera's frontend has them, and SDL is not built. SDL's types are named
++// here so that the machine's structure keeps its shape; the picture, the
++// sound and the controls go to and come from the core
++// (waterbox/cinterface.cpp) through the names below.
++typedef uint8_t Uint8;
++typedef struct SDL_Window SDL_Window;
++typedef struct SDL_Renderer SDL_Renderer;
++typedef struct SDL_Surface SDL_Surface;
++typedef struct SDL_Texture SDL_Texture;
++typedef struct SDL_Joystick SDL_Joystick;
++typedef union SDL_Event SDL_Event;
++typedef enum { SDL_FLIP_NONE = 0, SDL_FLIP_HORIZONTAL = 1, SDL_FLIP_VERTICAL = 2 } SDL_RendererFlip;
++struct avr8;
++// where the line being drawn goes: 720 pixels a line, 224 lines
++extern uint32_t *chimera_video;
++// the program wrote a sample to the sound output (OCR2A)
++void chimera_sound_level(uint8_t value);
++// the 224th line was drawn: the frame is over
++void chimera_frame_end(avr8 *machine);
++// how many times the program latched the controllers: its reads of them
++extern int chimera_input_reads;
++// the machine stopped: an instruction it does not know
++void chimera_halt(int errcode);
++#else
+ // If you're building from the command line or on a non-MS compiler you'll need
+ // -lSDL or somesuch.
+ #include <SDL2/SDL.h>
++#endif
+ #if defined (_MSC_VER)
+ 	#pragma comment(lib, "SDL.lib")
+ 	#pragma comment(lib, "SDLmain.lib")

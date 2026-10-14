@@ -1,0 +1,32 @@
+{
+ "package": "uzem",
+ "effectiveTerms": "MIT",
+ "commercialUse": "allowed",
+ "note": "The core is uzem, the Uzebox's own emulator (MIT; its files state the licence at their top, and licenses/ in this repository holds the text), with this repository's integration (MIT). The Uzebox repository's kernel and games are under the GNU GPL 3; none of them is in the package. The package contains no game of anyone's.",
+ "components": [
+  {
+   "name": "chimera-core-uzem (integration)",
+   "license": "MIT",
+   "url": "https://github.com/ToolAssisted-run/chimera-core-uzem",
+   "commit": "{selfCommit}",
+   "file": "LICENSE",
+   "sourceUrl": "https://github.com/ToolAssisted-run/chimera-core-uzem/archive/{commit}.tar.gz"
+  },
+  {
+   "name": "uzem (the Uzebox emulator)",
+   "license": "MIT",
+   "url": "https://github.com/Uzebox/uzebox",
+   "commit": "{submodule:extern/uzebox}",
+   "file": "licenses/uzem-MIT.txt",
+   "sourceUrl": "https://github.com/Uzebox/uzebox/archive/{commit}.tar.gz"
+  },
+  {
+   "name": "SDEmulator (in uzem)",
+   "license": "MIT",
+   "url": "https://github.com/Uzebox/uzebox",
+   "commit": "{submodule:extern/uzebox}",
+   "file": "licenses/SDEmulator-MIT.txt",
+   "sourceUrl": "https://github.com/Uzebox/uzebox/archive/{commit}.tar.gz"
+  }
+ ]
+}
