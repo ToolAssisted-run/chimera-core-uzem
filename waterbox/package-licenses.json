@@ -27,6 +27,12 @@
    "commit": "{submodule:extern/uzebox}",
    "file": "licenses/SDEmulator-MIT.txt",
    "sourceUrl": "https://github.com/Uzebox/uzebox/archive/{commit}.tar.gz"
+  },
+  {
+   "name": "A Super NES controller, a photograph (pictures/snes-controller.png)",
+   "license": "Public domain",
+   "url": "https://commons.wikimedia.org/wiki/File:SNES-Controller-Flat.jpg",
+   "file": "pictures/snes-controller.txt"
   }
  ]
 }
