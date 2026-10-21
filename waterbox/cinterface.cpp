@@ -117,7 +117,9 @@ static const int kPadWire[kPadButtons] = { 4, 5, 6, 7, 2, 3, 1, 0, 9, 8, 10, 11 
 // sends for them: a key's code when it goes down, F0 and its code when it
 // comes up. Keys marked extended are sent after an E0. The list is the
 // keys of a PC keyboard with codes of one byte, and the extended ones that
-// carry no fake shift (Print Screen and Pause are left out).
+// carry no fake shift (Print Screen and Pause are left out). They are listed
+// as they sit on the keyboard, row by row from the top, then the keys
+// beside the rows and the keypad (chimera#337).
 struct Key
 {
 	const char *name;
@@ -125,37 +127,36 @@ struct Key
 	bool extended;
 };
 static const Key kKeys[] = {
-	{ "A", 0x1C, false }, { "B", 0x32, false }, { "C", 0x21, false }, { "D", 0x23, false },
-	{ "E", 0x24, false }, { "F", 0x2B, false }, { "G", 0x34, false }, { "H", 0x33, false },
-	{ "I", 0x43, false }, { "J", 0x3B, false }, { "K", 0x42, false }, { "L", 0x4B, false },
-	{ "M", 0x3A, false }, { "N", 0x31, false }, { "O", 0x44, false }, { "P", 0x4D, false },
-	{ "Q", 0x15, false }, { "R", 0x2D, false }, { "S", 0x1B, false }, { "T", 0x2C, false },
-	{ "U", 0x3C, false }, { "V", 0x2A, false }, { "W", 0x1D, false }, { "X", 0x22, false },
-	{ "Y", 0x35, false }, { "Z", 0x1A, false },
-	{ "0", 0x45, false }, { "1", 0x16, false }, { "2", 0x1E, false }, { "3", 0x26, false },
+	{ "Escape", 0x76, false }, { "F1", 0x05, false }, { "F2", 0x06, false }, { "F3", 0x04, false },
+	{ "F4", 0x0C, false }, { "F5", 0x03, false }, { "F6", 0x0B, false }, { "F7", 0x83, false },
+	{ "F8", 0x0A, false }, { "F9", 0x01, false }, { "F10", 0x09, false }, { "F11", 0x78, false },
+	{ "F12", 0x07, false }, { "Scroll Lock", 0x7E, false },
+	{ "`", 0x0E, false }, { "1", 0x16, false }, { "2", 0x1E, false }, { "3", 0x26, false },
 	{ "4", 0x25, false }, { "5", 0x2E, false }, { "6", 0x36, false }, { "7", 0x3D, false },
-	{ "8", 0x3E, false }, { "9", 0x46, false },
-	{ "`", 0x0E, false }, { "-", 0x4E, false }, { "=", 0x55, false }, { "[", 0x54, false },
-	{ "]", 0x5B, false }, { "\\", 0x5D, false }, { ";", 0x4C, false }, { "'", 0x52, false },
-	{ ",", 0x41, false }, { ".", 0x49, false }, { "/", 0x4A, false },
-	{ "Space", 0x29, false }, { "Tab", 0x0D, false }, { "Return", 0x5A, false },
-	{ "Backspace", 0x66, false }, { "Escape", 0x76, false }, { "Caps Lock", 0x58, false },
-	{ "Left Shift", 0x12, false }, { "Right Shift", 0x59, false },
-	{ "Left Ctrl", 0x14, false }, { "Right Ctrl", 0x14, true },
-	{ "Left Alt", 0x11, false }, { "Right Alt", 0x11, true },
-	{ "F1", 0x05, false }, { "F2", 0x06, false }, { "F3", 0x04, false }, { "F4", 0x0C, false },
-	{ "F5", 0x03, false }, { "F6", 0x0B, false }, { "F7", 0x83, false }, { "F8", 0x0A, false },
-	{ "F9", 0x01, false }, { "F10", 0x09, false }, { "F11", 0x78, false }, { "F12", 0x07, false },
-	{ "Up", 0x75, true }, { "Down", 0x72, true }, { "Left", 0x6B, true }, { "Right", 0x74, true },
-	{ "Insert", 0x70, true }, { "Delete", 0x71, true }, { "Home", 0x6C, true }, { "End", 0x69, true },
-	{ "Page Up", 0x7D, true }, { "Page Down", 0x7A, true },
-	{ "Num Lock", 0x77, false }, { "Scroll Lock", 0x7E, false },
-	{ "Keypad 0", 0x70, false }, { "Keypad 1", 0x69, false }, { "Keypad 2", 0x72, false },
-	{ "Keypad 3", 0x7A, false }, { "Keypad 4", 0x6B, false }, { "Keypad 5", 0x73, false },
-	{ "Keypad 6", 0x74, false }, { "Keypad 7", 0x6C, false }, { "Keypad 8", 0x75, false },
-	{ "Keypad 9", 0x7D, false }, { "Keypad .", 0x71, false }, { "Keypad +", 0x79, false },
-	{ "Keypad -", 0x7B, false }, { "Keypad *", 0x7C, false }, { "Keypad /", 0x4A, true },
-	{ "Keypad Enter", 0x5A, true },
+	{ "8", 0x3E, false }, { "9", 0x46, false }, { "0", 0x45, false }, { "-", 0x4E, false },
+	{ "=", 0x55, false }, { "Backspace", 0x66, false },
+	{ "Tab", 0x0D, false }, { "Q", 0x15, false }, { "W", 0x1D, false }, { "E", 0x24, false },
+	{ "R", 0x2D, false }, { "T", 0x2C, false }, { "Y", 0x35, false }, { "U", 0x3C, false },
+	{ "I", 0x43, false }, { "O", 0x44, false }, { "P", 0x4D, false }, { "[", 0x54, false },
+	{ "]", 0x5B, false }, { "\\", 0x5D, false },
+	{ "Caps Lock", 0x58, false }, { "A", 0x1C, false }, { "S", 0x1B, false }, { "D", 0x23, false },
+	{ "F", 0x2B, false }, { "G", 0x34, false }, { "H", 0x33, false }, { "J", 0x3B, false },
+	{ "K", 0x42, false }, { "L", 0x4B, false }, { ";", 0x4C, false }, { "'", 0x52, false },
+	{ "Return", 0x5A, false },
+	{ "Left Shift", 0x12, false }, { "Z", 0x1A, false }, { "X", 0x22, false }, { "C", 0x21, false },
+	{ "V", 0x2A, false }, { "B", 0x32, false }, { "N", 0x31, false }, { "M", 0x3A, false },
+	{ ",", 0x41, false }, { ".", 0x49, false }, { "/", 0x4A, false }, { "Right Shift", 0x59, false },
+	{ "Left Ctrl", 0x14, false }, { "Left Alt", 0x11, false }, { "Space", 0x29, false },
+	{ "Right Alt", 0x11, true }, { "Right Ctrl", 0x14, true },
+	{ "Insert", 0x70, true }, { "Home", 0x6C, true }, { "Page Up", 0x7D, true },
+	{ "Delete", 0x71, true }, { "End", 0x69, true }, { "Page Down", 0x7A, true },
+	{ "Up", 0x75, true }, { "Left", 0x6B, true }, { "Down", 0x72, true }, { "Right", 0x74, true },
+	{ "Num Lock", 0x77, false }, { "Keypad /", 0x4A, true }, { "Keypad *", 0x7C, false },
+	{ "Keypad -", 0x7B, false }, { "Keypad 7", 0x6C, false }, { "Keypad 8", 0x75, false },
+	{ "Keypad 9", 0x7D, false }, { "Keypad +", 0x79, false }, { "Keypad 4", 0x6B, false },
+	{ "Keypad 5", 0x73, false }, { "Keypad 6", 0x74, false }, { "Keypad 1", 0x69, false },
+	{ "Keypad 2", 0x72, false }, { "Keypad 3", 0x7A, false }, { "Keypad Enter", 0x5A, true },
+	{ "Keypad 0", 0x70, false }, { "Keypad .", 0x71, false },
 };
 enum : int
 {

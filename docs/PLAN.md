@@ -173,3 +173,14 @@ Chimera's window lists 'P1 A' as X, J1 B3, X1 B. A project of the test
 program with its input written in the old column order (181 rows differ as
 text) plays in `chimera-run` to the same memory as the same input in the new
 order. A real game controller was not tried.
+
+**The keyboard in rows** (chimera#337, the same day). The keyboard's keys
+were listed alphabetically (A to Z, 0 to 9, then the rest). They are now
+listed as they sit on a PC keyboard, row by row from the top (Escape and the
+F keys, the number row, the QWERTY row, the home row, the Z row, the bottom
+row), then the keys beside the rows, the arrows and the keypad: the order of
+`kKeys` in `waterbox/cinterface.cpp`, which the package's list follows. The
+gate finds the keys by name. Measured: gate 75 of 75 (all 99 keys sent and
+read as before); frontend 3 of 3; the two projects written before either
+change (pads and keys in their old columns) replay to the same memory as
+before.

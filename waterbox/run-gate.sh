@@ -182,12 +182,15 @@ check "uze:p1-controller" "P1 Controller 'gamepad' puts the gamepad back in plac
 
 # the keyboard: each key held alone; the bytes the keyboard sent, and what
 # the kernel's own driver (kernel/keyboard.c) made of them
+# the keys are the last controls, listed as they sit on the keyboard
+# (chimera#337): the first is Escape
 keyA="$(index t "Key A")"
-nkeys=$(($(grep -c '^panel' "$work/panel.out") - keyA))
+key1="$(index t "Key Escape")"
+nkeys=$(($(grep -c '^panel' "$work/panel.out") - key1))
 : > "$work/keys.txt"
 for ((k = 0; k < nkeys; k++)); do
-	name="$("$native" "$work/t" --frames 1 --list-panel 2> /dev/null | awk -v i=$((keyA + k)) '$1 == "panel" && $2 == i' | sed "s/^[^']*'//; s/'[^']*\$//")"
-	"$native" "$work/t" --frames 160 --press $((keyA + k)):60:40 --dump-domain RAM "$work/kb.ram" > /dev/null 2>&1
+	name="$("$native" "$work/t" --frames 1 --list-panel 2> /dev/null | awk -v i=$((key1 + k)) '$1 == "panel" && $2 == i' | sed "s/^[^']*'//; s/'[^']*\$//")"
+	"$native" "$work/t" --frames 160 --press $((key1 + k)):60:40 --dump-domain RAM "$work/kb.ram" > /dev/null 2>&1
 	printf '%s\t%s\t%s\t%s\n' "$name" "$(r "$work/kb.ram" raw)" "$(r "$work/kb.ram" keys)" "$(r "$work/kb.ram" modifiers)" >> "$work/keys.txt"
 done
 check "uze:keyboard" "each of the $nkeys keys, held alone, is sent as a PC keyboard sends it (its code, then F0 and its code when it comes up, after E0 for the extended keys), and the kernel's keyboard driver reads it as that key" \
@@ -266,7 +269,7 @@ check "uze:save-data" "Export Save Data writes the EEPROM as eeprom.bin ($(wc -c
 	sh -c "[ '$(wc -c < "$ee" 2> /dev/null)' = 2048 ] && [ '$(eebyte "$ee" 16)' = 1 ] && [ '$(r "$work/sv2.ram" eepromSeen)' = 1 ] && [ '$(eebyte "$work/sv2-out/eeprom.bin" 16)' = 2 ]"
 
 # ------------------------------------------------- native and sandbox, states
-allrun="--frames 300 --report 10 --press $(index t "P1 A"):50:40 --press $(index t "P1 Up"):80:30 --press $((keyA + 3)):100:20 --press $(index t "P1 Start"):200:5 --press $(index t "P2 Y"):220:30"
+allrun="--frames 300 --report 10 --press $(index t "P1 A"):50:40 --press $(index t "P1 Up"):80:30 --press $(index t "Key D"):100:20 --press $(index t "P1 Start"):200:5 --press $(index t "P2 Y"):220:30"
 nat all t $allrun
 nat idle10 t --frames 300 --report 10
 box all-box t $allrun
