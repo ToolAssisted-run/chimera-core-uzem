@@ -1,5 +1,5 @@
 diff --git a/tools/uzem/avr8.cpp b/tools/uzem/avr8.cpp
-index d70bd58..3049d0d 100644
+index d70bd58..e72b9f0 100644
 --- a/tools/uzem/avr8.cpp
 +++ b/tools/uzem/avr8.cpp
 @@ -48,7 +48,9 @@ More info at uzebox.org
@@ -72,7 +72,7 @@ index d70bd58..3049d0d 100644
  		if (went_low == (1<<2))		// LATCH
  		{
 +#ifdef CHIMERA_CORE
-+			chimera_input_reads++;
++			chimera_input_read();
 +#endif
  			for (int i=0; i<2; i++)
  			{
@@ -133,7 +133,7 @@ index d70bd58..3049d0d 100644
 -
 +#endif // CHIMERA_CORE
 diff --git a/tools/uzem/avr8.h b/tools/uzem/avr8.h
-index 45b643c..35db090 100644
+index 45b643c..c8f1a6c 100644
 --- a/tools/uzem/avr8.h
 +++ b/tools/uzem/avr8.h
 @@ -43,9 +43,36 @@ THE SOFTWARE.
@@ -161,8 +161,8 @@ index 45b643c..35db090 100644
 +void chimera_sound_level(uint8_t value);
 +// the 224th line was drawn: the frame is over
 +void chimera_frame_end(avr8 *machine);
-+// how many times the program latched the controllers: its reads of them
-+extern int chimera_input_reads;
++// the program latched the controllers: a read of them
++void chimera_input_read();
 +// the machine stopped: an instruction it does not know
 +void chimera_halt(int errcode);
 +#else

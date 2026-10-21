@@ -180,8 +180,24 @@ static const char *const kAxisNames[kAxes] = { "Mouse Move X", "Mouse Move Y" };
 static int g_axis[kAxes];
 static bool g_mouse;           // the SNES mouse is in the first port
 
-int chimera_input_reads;
+static int g_inputReads;
 static bool g_inputRead;
+
+// Chimera's function to call at each read of the controls, so a Lua script's
+// event.oninputpoll runs there (chimera#344). It is the same callback slot in
+// every session and no savestate carries it.
+ECL_INVISIBLE static uintptr_t (*g_inputPoll)(uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t);
+ECL_EXPORT void SetInputPollCallback(uint64_t fn)
+{
+	g_inputPoll = (uintptr_t (*)(uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t))(uintptr_t)fn;
+}
+
+void chimera_input_read()
+{
+	g_inputReads++;
+	if (g_inputPoll)
+		g_inputPoll(0, 0, 0, 0, 0, 0);
+}
 
 static int clampi(int v, int lo, int hi) { return v < lo ? lo : v > hi ? hi : v; }
 
@@ -542,7 +558,7 @@ ECL_EXPORT void FrameAdvance(uint64_t packed)
 {
 	(void)packed;
 	g_audioFrames = 0;
-	chimera_input_reads = 0;
+	g_inputReads = 0;
 	set_controls();
 	g_frameDone = false;
 	unsigned cycles = 0;
@@ -559,7 +575,7 @@ ECL_EXPORT void FrameAdvance(uint64_t packed)
 		take_samples(kCyclesPerFrame - cycles);
 	}
 	g_frameCount++;
-	g_inputRead = chimera_input_reads > 0;
+	g_inputRead = g_inputReads > 0;
 }
 
 ECL_EXPORT int InputWasRead(void) { return g_inputRead; }

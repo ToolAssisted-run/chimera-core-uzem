@@ -384,8 +384,18 @@ if [ -n "$chimera_root" ] && [ -x "$runner" ] && [ -f "$package" ]; then
 	box eng t --frames 300 --press "$(index t "P1 A")":200:101 --press "$(index t "P2 Down")":150:151 --press "$(index t "Key Q")":100:201 --dump-domain RAM "$work/eng.ram"
 	check "engine:uze" "a project of the test program with presses plays in Chimera's headless runner to the sandbox runner's memory ($(wc -c < "$work/eng.ram" 2> /dev/null) bytes; the program read pads $(r "$work/engine.ram" pad1) and $(r "$work/engine.ram" pad2), and the key $(r "$work/engine.ram" keys))" \
 		sh -c "cmp -s '$work/engine.ram' '$work/eng.ram' && [ '$(r "$work/engine.ram" pad1) $(r "$work/engine.ram" pad2) $(r "$work/engine.ram" keys)' = '256 32 71' ]"
+	# each latch of the controllers is reported to Chimera as it happens, so a
+	# Lua script's event.oninputpoll runs there (chimera#344): every frame the
+	# program read its pads has at least one, and counting them moves nothing
+	"$runner" --project "$work/proj/test.chimeraProject" "$package" --files "$work/proj" --frames 300 --count-input-polls \
+		--dump "RAM=$work/polls.ram" --meta "$work/polls.meta" > "$work/polls.log" 2>&1
+	polls=$(sed -n 's/^inputPolls=//p' "$work/polls.meta" 2> /dev/null)
+	lags=$(sed -n 's/^lagFrames=//p' "$work/polls.meta" 2> /dev/null)
+	check "engine:input-polls" "the program's reads of its controls reach Chimera as they happen: ${polls:-none} in 300 frames, ${lags:-?} of them lag frames; the memory is the run's without counting" \
+		sh -c "[ '${polls:-none}' != none ] && [ '${polls:-0}' -ge $(( 300 - ${lags:-300} )) ] && [ '${lags:-300}' -lt 300 ] && cmp -s '$work/polls.ram' '$work/engine.ram'"
 else
 	report "engine:uze" SKIP "needs CHIMERA_ROOT with build/dll/chimera-run and build/Cores/uzem.chimeraCore"
+	report "engine:input-polls" SKIP "needs CHIMERA_ROOT with build/dll/chimera-run and build/Cores/uzem.chimeraCore"
 fi
 
 echo
