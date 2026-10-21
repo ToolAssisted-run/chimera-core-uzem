@@ -141,3 +141,35 @@ the right key on "RightShift"), which fires when the merging is turned off,
 as other cores already do. `package:key-names` accepts a left or right name
 only when the merged one is bound too. Checked on Xvfb: with 1, Return, left
 Shift and Up held, Chimera's window reports Number1, Enter, Shift and Up.
+
+## 2026-10-21: game controllers, and the pad's buttons grouped
+
+**Asked** (chimera#334, chimera#335). The gamepads worked only from the
+keyboard until a person bound a game controller by hand, and their buttons
+were listed in the order the SNES pad sends them (B, Y, Select, Start, Up,
+Down, Left, Right, A, X, L, R), which scatters the arrows and the face
+buttons in Config > Controls and in the input editor's columns.
+
+**Decided.** The buttons are listed as Chimera's SNES core lists them: Up,
+Down, Left, Right, Select, Start, Y, B, X, A, L, R. The core keeps the pad's
+own order where it matters, in the bits the kernel reads, with a table from
+each listed button to its bit (`kPadWire` in `waterbox/cinterface.cpp`). A
+project made before keeps its own column order in its log key, and Chimera
+reads its input by the names in that key.
+
+P1 stays on the keyboard and is also on the first game controller; P2 is on
+the second. On a controller each button is the one in the same place: the
+bottom face button is B, the right one A, the left one Y, the top one X, the
+shoulders L and R, Back is Select and Start is Start, and the directional
+pad and the left stick are the arrows. A controller SDL does not recognise
+as a game controller is read as a joystick: buttons 1 to 4 (Y, B, A, X), 5
+and 6 (L, R), 9 and 10 (Select, Start) and its first hat, which Chimera
+names POV0.
+
+**Measured.** The gate passes, 75 of 75; with the core sending each listed
+button as its list position, 5 checks failed (the gamepads, the opposites,
+P1 Controller, the sound and the project). The frontend tests pass, 3 of 3:
+Chimera's window lists 'P1 A' as X, J1 B3, X1 B. A project of the test
+program with its input written in the old column order (181 rows differ as
+text) plays in `chimera-run` to the same memory as the same input in the new
+order. A real game controller was not tried.

@@ -98,16 +98,20 @@ static void take_samples(unsigned cycles)
 }
 
 // ---- the controls ------------------------------------------------------------
-// Two SNES gamepads, in the order the pad sends its buttons: B, Y, Select,
-// Start, Up, Down, Left, Right, A, X, L, R. A SNES mouse can take the first
-// gamepad's place (the P1 Controller setting; by default when the game's
+// Two SNES gamepads. Their buttons are listed grouped, as Chimera's SNES core
+// lists them: the pad's arrows, Select and Start, the four buttons on its face
+// and the two on its shoulders (chimera#335). The pad sends them in an order
+// of its own, B, Y, Select, Start, Up, Down, Left, Right, A, X, L, R, and
+// kPadWire is each listed button's place in that order. A SNES mouse can take
+// the first gamepad's place (the P1 Controller setting; by default when the game's
 // header asks for one). The Uzebox keyboard is read through the second
 // controller port once the program starts talking to it. The power button
 // is the console's soft power switch.
 enum { kPadButtons = 12, kPads = 2 };
 static const char *const kPadNames[kPadButtons] = {
-	"B", "Y", "Select", "Start", "Up", "Down", "Left", "Right", "A", "X", "L", "R",
+	"Up", "Down", "Left", "Right", "Select", "Start", "Y", "B", "X", "A", "L", "R",
 };
+static const int kPadWire[kPadButtons] = { 4, 5, 6, 7, 2, 3, 1, 0, 9, 8, 10, 11 };
 
 // The keyboard's keys and the PS/2 codes (scan code set 2) the keyboard
 // sends for them: a key's code when it goes down, F0 and its code when it
@@ -203,7 +207,7 @@ static void set_controls(void)
 		uint32_t pressed = 0;
 		for (int b = 0; b < kPadButtons; b++)
 			if (g_held[p * kPadButtons + b])
-				pressed |= 1u << b;
+				pressed |= 1u << kPadWire[b];
 		g_uzebox.buttons[p] = ~pressed;
 	}
 	if (g_mouse)

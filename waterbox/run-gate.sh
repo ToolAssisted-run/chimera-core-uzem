@@ -150,14 +150,17 @@ each_button() {
 		echo "$c $(r "$work/eb.ram" "$4")" >> "$5"
 	done
 }
-# one_bit <file> <count>: there are <count> lines, and line c has bit c set and no other
-one_bit() { awk -v n="$2" '{ if ($2 != 2 ^ $1) bad = 1; c++ } END { exit (bad || c != n) }' "$1"; }
+# one_bit <file> <count>: there are <count> lines, and line c has one bit set, the
+# bit of control c's place in the order the pad sends its buttons (B, Y, Select,
+# Start, Up, Down, Left, Right, A, X, L, R), while the controls are listed Up,
+# Down, Left, Right, Select, Start, Y, B, X, A, L, R (chimera#335)
+one_bit() { awk -v n="$2" 'BEGIN { split("4 5 6 7 2 3 1 0 9 8 10 11", wire, " ") } { if ($2 != 2 ^ wire[$1 + 1]) bad = 1; c++ } END { exit (bad || c != n) }' "$1"; }
 each_button t 0 12 pad1 "$work/p1.txt"
 each_button t 12 12 pad2 "$work/p2.txt"
 pads=no; one_bit "$work/p1.txt" 12 && one_bit "$work/p2.txt" 12 && pads=yes
-check "uze:gamepads" "each of the 24 gamepad buttons (P1 and P2: B, Y, Select, Start, Up, Down, Left, Right, A, X, L, R), held alone, is the kernel's button bit of its own place in the pad's order, and no other" \
+check "uze:gamepads" "each of the 24 gamepad buttons (P1 and P2: Up, Down, Left, Right, Select, Start, Y, B, X, A, L, R), held alone, is the kernel's button bit of its place in the order the pad sends them (B, Y, Select, Start, Up, Down, Left, Right, A, X, L, R), and no other" \
 	[ "$pads" = yes ]
-nat lr t --frames 100 --press 6:60:60 --press 7:60:60 --press 4:60:60 --press 5:60:60 --dump-domain RAM "$work/lr.ram"
+nat lr t --frames 100 --press 2:60:60 --press 3:60:60 --press 0:60:60 --press 1:60:60 --dump-domain RAM "$work/lr.ram"
 check "uze:opposites" "Left with Right and Up with Down held together reach the program as Left and Up alone, as uzem's controller does ($(r "$work/lr.ram" pad1); Up and Left are 16 and 64)" \
 	[ "$(r "$work/lr.ram" pad1)" = 80 ]
 
@@ -172,7 +175,7 @@ check "uze:mouse" "a .uze game whose header asks for the mouse gets a SNES mouse
 	[ "$mo" = "8200 8705|8100 03e4|8000 0000" ]
 folder mg '{"p1Controller":"gamepad"}' "$progs/testprog-mouse.uze"
 folder hm '{"p1Controller":"mouse"}' "$progs/testprog.hex"
-nat mg mg --frames 100 --press 0:60:60 --dump-domain RAM "$work/mg.ram"
+nat mg mg --frames 100 --press "$(index mg "P1 B")":60:60 --dump-domain RAM "$work/mg.ram"
 nat hm hm --frames 100 --dump-domain RAM "$work/hm.ram"
 check "uze:p1-controller" "P1 Controller 'gamepad' puts the gamepad back in place of the header's mouse (P1 B reads $(r "$work/mg.ram" pad1)), and 'mouse' puts a mouse on a .hex program, which has no header ($(printf %04x "$(r "$work/hm.ram" pad1)"))" \
 	[ "$(r "$work/mg.ram" pad1) $(printf %04x "$(r "$work/hm.ram" pad1)")" = "1 8000" ]
@@ -247,7 +250,7 @@ nat q q --frames 300 --report 100
 check "uze:lag" "the program the kernel reads the controls for has a lag frame only while the kernel starts ($(field "$work/idle.out" lag) in 300); its twin that reads none, 300 ($(field "$work/q.out" lag))" \
 	[ "$(field "$work/idle.out" lag)" -le 10 -a "$(field "$work/q.out" lag)" = 300 ]
 
-nat snd t --frames 200 --report 5 --press 8:60:100
+nat snd t --frames 200 --report 5 --press "$(index t "P1 A")":60:100
 check "uze:sound" "262 samples a frame (one a line: $(field "$work/snd.out" aud)); the sound is still with no key held, and changes while P1 A sounds a note ($(stream "$work/snd.out" | awk '$2 > 60 && $2 <= 160 {print $10}' | sort -u | wc -l) different in the 20 reports of it)" \
 	sh -c "[ '$(field "$work/snd.out" aud)' = 262 ] && [ $(stream "$work/idle.out" | awk '$2 > 50 {print $10}' | sort -u | wc -l) = 1 ] && [ $(stream "$work/snd.out" | awk '$2 > 60 && $2 <= 160 {print $10}' | sort -u | wc -l) -ge 10 ]"
 
@@ -263,7 +266,7 @@ check "uze:save-data" "Export Save Data writes the EEPROM as eeprom.bin ($(wc -c
 	sh -c "[ '$(wc -c < "$ee" 2> /dev/null)' = 2048 ] && [ '$(eebyte "$ee" 16)' = 1 ] && [ '$(r "$work/sv2.ram" eepromSeen)' = 1 ] && [ '$(eebyte "$work/sv2-out/eeprom.bin" 16)' = 2 ]"
 
 # ------------------------------------------------- native and sandbox, states
-allrun="--frames 300 --report 10 --press 8:50:40 --press 4:80:30 --press $((keyA + 3)):100:20 --press 3:200:5 --press 13:220:30"
+allrun="--frames 300 --report 10 --press $(index t "P1 A"):50:40 --press $(index t "P1 Up"):80:30 --press $((keyA + 3)):100:20 --press $(index t "P1 Start"):200:5 --press $(index t "P2 Y"):220:30"
 nat all t $allrun
 nat idle10 t --frames 300 --report 10
 box all-box t $allrun

@@ -27,8 +27,9 @@ it. Nothing else is needed.
 
 ## Buttons and settings
 
-- **Gamepads**: P1 and P2, SNES pads: B, Y, Select, Start, Up, Down, Left,
-  Right, A, X, L and R.
+- **Gamepads**: P1 and P2, SNES pads: Up, Down, Left, Right, Select, Start,
+  Y, B, X, A, L and R. P1 is on the keyboard and the first game controller,
+  P2 on the second game controller.
 - **The mouse**: a SNES mouse in the first port, in place of P1's gamepad,
   for the games that use one. Mouse Left and Right are its buttons, Mouse
   Move X and Y how far it moves in a frame.
