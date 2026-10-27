@@ -4,7 +4,7 @@ A core for [Chimera](https://github.com/ToolAssisted-run/chimera), the
 frontend for tool-assisted speedruns, for the **[Uzebox](https://uzebox.org)**,
 the open-source game console. It is built on uzem, the Uzebox's own
 emulator, from the [Uzebox repository](https://github.com/Uzebox/uzebox), and
-produces one file, `uzem.chimeraCore`, that goes in Chimera's `Cores` folder.
+produces one file, `uzem.chimeraCore`, that goes in Chimera's `cores` folder.
 
 ## Status
 

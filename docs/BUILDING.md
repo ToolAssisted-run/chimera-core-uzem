@@ -78,13 +78,13 @@ control into its memory, and the Uzebox repository's own games
 games with a stand-in for ffmpeg that keeps the raw pictures and sound
 (`tests/upstream-ffmpeg.sh`), and compares them with the core's
 (`tests/compare-upstream.py`). The second runs the package in Chimera's
-window under Mono on a private Xvfb display; it needs Chimera's interface
-built (`dotnet build`).
+window, run headless (no display is needed); it needs Chimera built with its
+window (`tools/ci-chimera.sh`).
 
 Chimera's own checks of a package:
 
 ```sh
-CHIMERA_CORES_DIR=<folder with the package> dotnet test source/gui/Chimera.Tests.Client.Common/Chimera.Tests.Client.Common.csproj -c Release --filter "FullyQualifiedName~InstalledCorePackagesTests|FullyQualifiedName~MnemonicUniquenessTests"
+CHIMERA_CORES_DIR=<folder with the package> <chimera>/build/meson-linux/source/ui/test-packages
 ```
 
 run in the Chimera checkout.
