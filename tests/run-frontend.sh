@@ -1,6 +1,6 @@
 #!/bin/bash
-# The package in Chimera's own window (Chimera.exe under Mono, on a private
-# Xvfb display), which the headless runner cannot show:
+# The package in Chimera's own window (run headless: it needs no display),
+# which the headless runner cannot show:
 #  - the test program (tests/testprog) runs in the window and leaves the
 #    memory the headless runner leaves at the same frame, with a button and a
 #    key pressed, at uzem's picture size (720x224);
@@ -11,7 +11,7 @@
 #
 # Usage: tests/run-frontend.sh --chimera-root <chimera checkout> [--frames N] [--keep]
 #   --keep   leave the work folder (logs, configurations, projects) and say where it is
-# Needs: mono, Xvfb, Chimera built with its window (dotnet build), and the
+# Needs: Chimera built with its window (chimera --headless), and the
 # package installed in that checkout (waterbox/build-package.sh -r <chimera>),
 # and the AVR compiler for the programs (avr-gcc, avr-libc).
 set -u
@@ -35,41 +35,30 @@ done
 [ -n "$chimera_root" ] && [ -d "$chimera_root" ] || { echo "say where Chimera is: --chimera-root <chimera checkout>" >&2; exit 2; }
 chimera_root="$(cd "$chimera_root" && pwd)"
 
-emu_exe="$chimera_root/build/Chimera.exe"
+chimera_exe="$chimera_root/build/meson-linux/source/ui/chimera"
 package="$chimera_root/build/Cores/uzem.chimeraCore"
 runwbx="$root/build/meson-native/run-wbx"
 core="$root/build/meson-guest/core.wbx"
 runner="$chimera_root/build/meson-linux/chimera-run"
-[ -f "$emu_exe" ] || { echo "Chimera's window is not built: $emu_exe" >&2; exit 1; }
+[ -x "$chimera_exe" ] || { echo "Chimera's window is not built: $chimera_exe" >&2; exit 1; }
 [ -f "$package" ] || { echo "the package is not installed: $package (run waterbox/build-package.sh -r $chimera_root)" >&2; exit 1; }
 [ -x "$runwbx" ] && [ -f "$core" ] || { echo "the sandbox build is not there: $runwbx, $core" >&2; exit 1; }
 [ -x "$runner" ] || { echo "Chimera's headless runner is not built: $runner" >&2; exit 1; }
 
 work="$(mktemp -d)"
-xvfb_pid=""
 cleanup() {
-	[ -n "$xvfb_pid" ] && kill "$xvfb_pid" 2>/dev/null
 	if [ -n "$keep" ]; then echo "work folder kept: $work"; else rm -rf "$work"; fi
 }
 trap cleanup EXIT
 
-export LD_LIBRARY_PATH="$chimera_root/build/dll:$chimera_root/build:/usr/lib/x86_64-linux-gnu"
-export MONO_CRASH_NOFILE=1 MONO_WINFORMS_XIM_STYLE=disabled ALSOFT_DRIVERS=null
-# always a display of this test's own: nobody's desktop is drawn on
-command -v Xvfb >/dev/null || { echo "Xvfb not found (apt install xvfb)" >&2; exit 1; }
-for n in 90 91 92 93 94 95 96; do
-	if [ ! -e "/tmp/.X11-unix/X$n" ]; then
-		Xvfb ":$n" -screen 0 1024x768x24 -nolisten tcp > /dev/null 2>&1 & xvfb_pid=$!
-		export DISPLAY=":$n"; break
-	fi
-done
-[ -n "$xvfb_pid" ] || { echo "no free display number for Xvfb" >&2; exit 1; }
-sleep 1
+# run-wbx finds miniBox's host library in Chimera's build/dll
+export LD_LIBRARY_PATH="$chimera_root/build/dll${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
-config="$work/config.ini"
-( cd "$chimera_root" && timeout 120 mono "$emu_exe" --headless "--config=$config" "--lua=$here/exit.lua" ) > "$work/bootstrap.log" 2>&1
-[ -f "$config" ] || { echo "Chimera did not write a configuration:"; tail -5 "$work/bootstrap.log"; exit 1; } >&2
-sed -i 's/"DispMethod": [0-9]/"DispMethod": 1/' "$config"
+# Chimera's window, run headless: the cores installed in the checkout, its
+# settings, cache and recovery files the run's own, and nothing carried over
+# from a Chimera installed on this machine
+export ALSOFT_DRIVERS=null CHIMERA_CORES_DIR="$chimera_root/build/Cores" CHIMERA_QT_CACHE="$work/qt-cache" CHIMERA_QT_RECOVERY="$work/qt-recovery" \
+	CHIMERA_QT_HASHES="$work/qt-file-hashes.txt" CHIMERA_QT_CHIMERA_SETTINGS="$work/no-chimera-config.ini"
 
 ok=0
 failed=0
@@ -100,13 +89,13 @@ run_frontend() {
 		echo "shot="
 		echo "domain=$domain"
 	} > "$job"
-	( cd "$chimera_root" && MINIHAWK_JOB="$job" timeout 900 mono "$emu_exe" --headless \
+	( cd "$chimera_root" && MINIHAWK_JOB="$job" timeout 900 "$chimera_exe" --headless \
 		"--config=$cfg" "--project=$work/$tag/$tag.chimeraProject" "--lua=$here/frontend-ram.lua" ) >> "$work/$tag.log" 2>&1
 	[ -f "$work/$tag.meta.txt" ] && grep -q "^status=OK" "$work/$tag.meta.txt"
 }
 value() { sed -n "s/^$2=//p" "$work/$1.meta.txt" 2>/dev/null; }
 
-python3 "$here/settings-config.py" "$config" "$work/config.base.ini" '{}'
+python3 "$here/settings-config.py" "$work/settings.base.json" '{}'
 
 # ---- the test program: needs no file of anyone's
 r() { python3 "$here/results.py" "$1" "$2" 2> /dev/null; }
@@ -124,7 +113,7 @@ make_project tt $((frames + 100)) "$work/progs/testprog.uze" "press=P1 A:99:$fra
 	--dump "RAM=$work/engine.ram.bin" > "$work/engine.log" 2>&1
 pad="$(r "$work/engine.ram.bin" pad1)"
 keyq="$(r "$work/engine.ram.bin" keys)"
-if ! run_frontend tt "$work/config.base.ini" "$frames" "RAM"; then
+if ! run_frontend tt "$work/settings.base.json" "$frames" "RAM"; then
 	report "window:uze" FAIL "Chimera did not finish the run: $(value tt detail) $(tail -2 "$work/tt.log" | tr '\n' ' ' | cut -c1-200)"
 elif [ "$(value tt frames)" != "$frames" ] || [ "$(value tt width)" != 720 ] || [ "$(value tt height)" != 224 ]; then
 	report "window:uze" FAIL "frames $(value tt frames) of $frames, picture $(value tt width)x$(value tt height) and not 720x224"
@@ -134,10 +123,14 @@ else
 	report "window:uze" FAIL "the memory differs from the headless runner's (or one of the two is missing), or P1 A and Q did not reach the program ($pad $keyq)"
 fi
 
-python3 "$here/forget-controller.py" "$work/config.base.ini" "$work/config.keys.ini" "Uzebox Controls"
+# the keys the package ships are the machine's when nobody changed them (the
+# window keeps only the keys a person changed; fresh settings have none)
 mkdir -p "$work/keys"; cp "$work/tt/testprog.uze" "$work/keys/"; sed 's/"uzem-test-[^"]*"/"uzem-test-keys"/' "$work/tt/tt.chimeraProject" > "$work/keys/keys.chimeraProject"
-if run_frontend keys "$work/config.keys.ini" 1 ""; then
-	if python3 "$here/check-keybinds.py" "$work/config.keys.ini" "$wb/default_keybinds.json" "Uzebox Controls" "P1 A" > "$work/keys.txt" 2>&1; then
+printf 'out=%s/keys.controls.json\nmeta=%s/keys.meta.txt\n' "$work" "$work" > "$work/job.keys.txt"
+( cd "$chimera_root" && MINIHAWK_JOB="$work/job.keys.txt" timeout 900 "$chimera_exe" --headless \
+	"--config=$work/settings.keys.json" "--project=$work/keys/keys.chimeraProject" "--lua=$here/dump-controls.lua" ) >> "$work/keys.log" 2>&1
+if [ -f "$work/keys.meta.txt" ] && grep -q "^status=OK" "$work/keys.meta.txt"; then
+	if python3 "$here/check-keybinds.py" "$work/keys.controls.json" "$wb/default_keybinds.json" "Uzebox Controls" "P1 A" > "$work/keys.txt" 2>&1; then
 		report "window:keys" PASS "$(cat "$work/keys.txt")"
 	else
 		report "window:keys" FAIL "$(head -1 "$work/keys.txt")"
@@ -152,7 +145,7 @@ if sh "$here/build-demos.sh" "$work/demos" > "$work/demos.log" 2>&1; then
 	make_project demo $((dframes + 100)) "$work/demos/SuperMarioDemo.uze" "press=P1 Right:99:200"
 	"$runner" --project "$work/demo/demo.chimeraProject" "$package" --files "$work/demo" --frames "$dframes" \
 		--dump "RAM=$work/demo-engine.ram.bin" > "$work/demo-engine.log" 2>&1
-	if ! run_frontend demo "$work/config.base.ini" "$dframes" "RAM"; then
+	if ! run_frontend demo "$work/settings.base.json" "$dframes" "RAM"; then
 		report "window:demo" FAIL "Chimera did not finish the run: $(value demo detail) $(tail -2 "$work/demo.log" | tr '\n' ' ' | cut -c1-200)"
 	elif [ "$(value demo frames)" = "$dframes" ] && [ -s "$work/demo-engine.ram.bin" ] && cmp -s "$work/demo-engine.ram.bin" "$work/demo.ram.bin"; then
 		report "window:demo" PASS "Super Mario Demo ran $dframes frames in the window, $(value demo width)x$(value demo height), and left the memory the headless runner leaves"
