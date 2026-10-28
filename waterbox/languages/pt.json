@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "uma linha não começa com ':'",
+		"error.hex_digits": "uma linha não tem apenas dígitos hexadecimais",
+		"error.hex_empty": "não tem nenhum programa",
+		"error.hex_past_flash": "uma linha grava além dos 64 KB da memória flash",
+		"error.hex_short": "uma linha não tem apenas dígitos hexadecimais, ou é curta demais",
+		"error.no_file": "Nenhum arquivo de jogo está no projeto.",
+		"error.not_game": "'%1' não é um jogo do Uzebox: não é um arquivo .uze nem um programa .hex.",
+		"error.not_hex": "'%1' não pôde ser carregado como um programa .hex: %2",
+		"error.not_read": "Não foi possível ler o jogo '%1'.",
+		"error.not_uze": "'%1' não pôde ser carregado como um jogo .uze. Pode ser para o Uzebox 2.0, que o uzem não executa.",
+		"setting.p1controller": "Controle P1",
+		"setting.p1controller.about": "O que está ligado à primeira porta de controle: um controle de SNES ou um mouse de SNES. 'auto' faz o que o arquivo do jogo pede: um arquivo .uze pode dizer que quer o mouse, como o uzem o lê; um arquivo .hex não pode, e recebe o controle. Faz parte da máquina, então um filme precisa do mesmo valor.",
+		"setting.randomseed": "Semente aleatória",
+		"setting.randomseed.about": "Quando o console inicia, o kernel usa o seu temporizador de vigilância para criar uma semente aleatória para os jogos. No console real esse temporizador deriva; o uzem acrescenta uma deriva aleatória própria, que este número inicia. Um número diferente pode dar aos jogos outros números aleatórios. Faz parte da máquina, então um filme precisa do mesmo valor.",
+		"slot.game": "Jogo",
+		"slot.game.help": "O jogo do Uzebox: um arquivo .uze (o programa com um cabeçalho que o nomeia), ou um programa .hex como o compilador do Uzebox o grava.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "A EEPROM do console (2 KB, onde os jogos guardam recordes e jogos salvos) no início, para um projeto que começa de dados salvos: um arquivo que Emulador > Exportar dados salvos... grava (eeprom.bin), ou o eeprom.bin do próprio uzem. Todos os jogos dividem a mesma EEPROM, cada um num bloco próprio. O arquivo nunca é alterado. Deixe isto vazio para começar com a EEPROM em branco.",
+		"slot.savedata.name_help": "um arquivo de EEPROM é identificado pela sua extensão, .bin."
+	}
+}

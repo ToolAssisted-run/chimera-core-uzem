@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "한 줄이 ':'로 시작하지 않습니다",
+		"error.hex_digits": "한 줄이 16진수 숫자가 아닙니다",
+		"error.hex_empty": "프로그램이 들어 있지 않습니다",
+		"error.hex_past_flash": "한 줄이 64 KB 플래시를 넘어서 씁니다",
+		"error.hex_short": "한 줄이 16진수 숫자가 아니거나 너무 짧습니다",
+		"error.no_file": "프로젝트에 게임 파일이 없습니다.",
+		"error.not_game": "'%1'은(는) Uzebox 게임이 아닙니다. .uze 파일도 .hex 프로그램도 아닙니다.",
+		"error.not_hex": "'%1'을(를) .hex 프로그램으로 불러올 수 없습니다: %2",
+		"error.not_read": "게임 '%1'을(를) 읽을 수 없습니다.",
+		"error.not_uze": "'%1'을(를) .uze 게임으로 불러올 수 없습니다. Uzebox 2.0용일 수 있는데, uzem은 이것을 실행하지 않습니다.",
+		"setting.p1controller": "P1 컨트롤러",
+		"setting.p1controller.about": "첫 번째 컨트롤러 포트에 꽂힌 것입니다. SNES 게임패드 또는 SNES 마우스입니다. 'auto'는 게임 파일이 요구하는 것을 따릅니다. .uze 파일은 uzem이 읽을 때 마우스를 원한다고 말할 수 있습니다. .hex 파일은 그렇게 말할 수 없으므로 게임패드를 씁니다. 이것은 머신의 일부이므로 무비에는 같은 값이 필요합니다.",
+		"setting.randomseed": "난수 시드",
+		"setting.randomseed.about": "콘솔이 시작할 때 커널이 워치독 타이머의 시간을 재서 게임용 난수 시드를 만듭니다. 실제 콘솔에서는 이 타이머가 조금씩 어긋납니다. uzem은 이 숫자로 시작하는 자체 무작위 어긋남을 더합니다. 다른 숫자는 게임에 다른 난수를 줄 수 있습니다. 이것은 머신의 일부이므로 무비에는 같은 값이 필요합니다.",
+		"slot.game": "게임",
+		"slot.game.help": "Uzebox 게임입니다. .uze 파일(이름을 적은 머리글이 있는 프로그램)이거나, Uzebox의 컴파일러가 쓰는 .hex 프로그램입니다.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "콘솔의 EEPROM(2 KB, 게임이 최고 점수와 저장된 게임을 두는 곳)으로, 프로젝트가 저장 데이터에서 시작할 때 처음에 담고 있는 것입니다. 저장 데이터 내보내기...가 쓴 파일(eeprom.bin)이거나, uzem 자체의 eeprom.bin입니다. 모든 게임이 하나의 EEPROM을 나눠 쓰며, 각자 자기 블록을 가집니다. 파일은 결코 바뀌지 않습니다. 빈 EEPROM으로 시작하려면 비워 두십시오.",
+		"slot.savedata.name_help": "EEPROM 파일은 확장자 .bin으로 알아봅니다."
+	}
+}

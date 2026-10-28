@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "linia nie zaczyna się od ':'",
+		"error.hex_digits": "linia nie składa się z cyfr szesnastkowych",
+		"error.hex_empty": "nie zawiera programu",
+		"error.hex_past_flash": "linia zapisuje poza 64 KB pamięci flash",
+		"error.hex_short": "linia nie składa się z cyfr szesnastkowych albo jest za krótka",
+		"error.no_file": "W projekcie nie ma pliku gry.",
+		"error.not_game": "'%1' nie jest grą Uzebox: nie jest plikiem .uze ani programem .hex.",
+		"error.not_hex": "'%1' nie udało się wczytać jako programu .hex: %2",
+		"error.not_read": "Nie udało się odczytać gry '%1'.",
+		"error.not_uze": "'%1' nie udało się wczytać jako gry .uze. Może być dla Uzebox 2.0, którego uzem nie uruchamia.",
+		"setting.p1controller": "Kontroler P1",
+		"setting.p1controller.about": "Co jest podłączone do pierwszego portu kontrolera: pad SNES albo mysz SNES. „auto” robi to, czego żąda plik gry: plik .uze może powiedzieć, że chce myszy, tak jak czyta go uzem; plik .hex nie może i dostaje pad. Jest częścią maszyny, więc nagranie potrzebuje tej samej wartości.",
+		"setting.randomseed": "Ziarno liczb losowych",
+		"setting.randomseed.about": "Gdy konsola startuje, jądro ustawia swój timer watchdog, aby zrobić losowe ziarno dla gier. W prawdziwej konsoli ten timer się przesuwa; uzem dodaje własne losowe przesunięcie, od którego zaczyna ta liczba. Inna liczba może dać grze inne liczby losowe. Jest częścią maszyny, więc nagranie potrzebuje tej samej wartości.",
+		"slot.game": "Gra",
+		"slot.game.help": "Gra Uzebox: plik .uze (program z nagłówkiem, który go nazywa) albo program .hex, taki jak zapisuje kompilator Uzebox.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "EEPROM konsoli (2 KB, gdzie gry trzymają wyniki i zapisane gry) na starcie, dla projektu zaczynającego się od zapisanych danych: plik zapisany przez Emulator > Export Save Data... (eeprom.bin) albo własny eeprom.bin uzem. Każda gra dzieli jeden EEPROM, każda we własnym bloku. Plik nigdy nie jest zmieniany. Zostaw to puste, aby zacząć z czystym EEPROM-em.",
+		"slot.savedata.name_help": "plik EEPROM rozpoznaje się po rozszerzeniu .bin."
+	}
+}

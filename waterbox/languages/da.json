@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "en linje begynder ikke med ':'",
+		"error.hex_digits": "en linje er ikke hex-cifre",
+		"error.hex_empty": "den indeholder intet program",
+		"error.hex_past_flash": "en linje skriver forbi de 64 KB flash",
+		"error.hex_short": "en linje er ikke hex-cifre, eller den er for kort",
+		"error.no_file": "Der er ingen spilfil i projektet.",
+		"error.not_game": "'%1' er ikke et Uzebox-spil: den er hverken en .uze-fil eller et .hex-program.",
+		"error.not_hex": "'%1' kunne ikke indlæses som et .hex-program: %2",
+		"error.not_read": "Spillet '%1' kunne ikke læses.",
+		"error.not_uze": "'%1' kunne ikke indlæses som et .uze-spil. Den kan være til Uzebox 2.0, som uzem ikke kører.",
+		"setting.p1controller": "P1-controller",
+		"setting.p1controller.about": "Hvad der er sat i den første controllerport: en SNES-gamepad eller en SNES-mus. 'auto' gør det, spillets fil beder om: en .uze-fil kan sige, at den vil have musen, sådan som uzem læser den; en .hex-fil kan ikke, og den får gamepad'en. Den hører til maskinen, så en optagelse skal have samme værdi.",
+		"setting.randomseed": "Tilfældigt frø",
+		"setting.randomseed.about": "Når konsollen starter, tidsindstiller kernen sin watchdog-timer for at lave et tilfældigt frø til spil. På den rigtige konsol driver den timer; uzem lægger en tilfældig drift af sin egen oveni, og det er den, dette tal starter. Et andet tal kan give et spil andre tilfældige tal. Den hører til maskinen, så en optagelse skal have samme værdi.",
+		"slot.game": "Spil",
+		"slot.game.help": "Uzebox-spillet: en .uze-fil (programmet med en header, der navngiver det), eller et .hex-program, sådan som Uzebox' compiler skriver det.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "Konsollens EEPROM (2 KB, hvor spil gemmer highscores og gemte spil) ved starten, til et projekt der begynder fra gemte data: en fil, sådan som Emulator > Eksportér gemte data... skriver den (eeprom.bin), eller uzems egen eeprom.bin. Alle spil deler den ene EEPROM, hver i sin egen blok. Filen ændres aldrig. Lad feltet være tomt for at starte med en tom EEPROM.",
+		"slot.savedata.name_help": "en EEPROM-fil genkendes på sin endelse, .bin."
+	}
+}

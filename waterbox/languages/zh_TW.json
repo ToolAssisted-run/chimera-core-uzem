@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "某一行不是以 ':' 開頭",
+		"error.hex_digits": "某一行不是十六進位數字",
+		"error.hex_empty": "它不含任何程式",
+		"error.hex_past_flash": "某一行的寫入超出了 64 KB 的快閃記憶體",
+		"error.hex_short": "某一行不是十六進位數字,或太短",
+		"error.no_file": "專案中沒有遊戲檔案。",
+		"error.not_game": "「%1」不是 Uzebox 遊戲:它既不是 .uze 檔,也不是 .hex 程式。",
+		"error.not_hex": "「%1」無法作為 .hex 程式載入:%2",
+		"error.not_read": "無法讀取遊戲「%1」。",
+		"error.not_uze": "「%1」無法作為 .uze 遊戲載入。它可能是給 Uzebox 2.0 的,而 uzem 不執行它。",
+		"setting.p1controller": "P1 控制器",
+		"setting.p1controller.about": "插在第一個控制器連接埠上的東西:SNES 手把或 SNES 滑鼠。「auto」依遊戲檔案的要求決定:.uze 檔可以說明它需要滑鼠,uzem 會讀取這點;.hex 檔無法說明,會得到手把。它屬於機器的一部分,因此錄影需要相同的值。",
+		"setting.randomseed": "亂數種子",
+		"setting.randomseed.about": "主機開機時,核心以看門狗計時器的時間產生遊戲用的亂數種子。在真實主機上,該計時器會漂移;uzem 會加入它自己的隨機漂移,而此數字是其起點。不同的數字可以讓遊戲得到另一組亂數。它屬於機器的一部分,因此錄影需要相同的值。",
+		"slot.game": "遊戲",
+		"slot.game.help": "Uzebox 遊戲:一個 .uze 檔(其標頭寫明名稱的程式),或 Uzebox 編譯器寫出的 .hex 程式。",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "主機的 EEPROM(2 KB,遊戲保存高分與存檔之處)在開始時的內容,供從已存資料開始的專案使用:「模擬器 > 匯出存檔資料...」寫出的檔案(eeprom.bin),或 uzem 自己的 eeprom.bin。所有遊戲共用同一個 EEPROM,每個遊戲佔一個區塊。檔案本身永遠不會被更改。留空則以空白的 EEPROM 開始。",
+		"slot.savedata.name_help": "EEPROM 檔案以副檔名辨識,即 .bin。"
+	}
+}

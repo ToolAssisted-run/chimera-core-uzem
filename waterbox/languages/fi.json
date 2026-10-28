@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "rivi ei ala merkillä ':'",
+		"error.hex_digits": "rivi ei ole heksadesimaalilukuja",
+		"error.hex_empty": "se ei sisällä ohjelmaa",
+		"error.hex_past_flash": "rivi kirjoittaa flash-muistin 64 KB:n yli",
+		"error.hex_short": "rivi ei ole heksadesimaalilukuja tai on liian lyhyt",
+		"error.no_file": "Projektissa ei ole pelitiedostoa.",
+		"error.not_game": "'%1' ei ole Uzebox-peli: se ei ole .uze-tiedosto eikä .hex-ohjelma.",
+		"error.not_hex": "'%1' ei voitu ladata .hex-ohjelmana: %2",
+		"error.not_read": "Peliä '%1' ei voitu lukea.",
+		"error.not_uze": "'%1' ei voitu ladata .uze-pelinä. Se voi olla Uzebox 2.0:lle, jota uzem ei aja.",
+		"setting.p1controller": "P1:n ohjain",
+		"setting.p1controller.about": "Mikä on kytketty ensimmäiseen ohjainporttiin: SNES-peliohjain tai SNES-hiiri. 'auto' tekee sen, mitä pelin tiedosto pyytää: .uze-tiedosto voi ilmoittaa haluavansa hiiren, kuten uzem sen lukee; .hex-tiedosto ei voi, ja se saa peliohjaimen. Tämä kuuluu koneeseen, joten tallenne tarvitsee saman arvon.",
+		"setting.randomseed": "Satunnaislukujen siemen",
+		"setting.randomseed.about": "Kun konsoli käynnistyy, ydin ajoittaa vahtikoiran ajastimensa tehdäkseen pelien satunnaislukujen siemenen. Oikealla konsolilla ajastin kulkee harhaan; uzem lisää oman satunnaisen harhansa, ja tämä luku aloittaa sen. Eri luku voi antaa pelille toiset satunnaisluvut. Tämä kuuluu koneeseen, joten tallenne tarvitsee saman arvon.",
+		"slot.game": "Peli",
+		"slot.game.help": "Uzebox-peli: .uze-tiedosto (ohjelma, jonka otsikko kertoo sen nimen), tai .hex-ohjelma sellaisena kuin Uzeboxin kääntäjä sen kirjoittaa.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "Konsolin EEPROM (2 KB, johon pelit tallentavat ennätykset ja tallennetut pelit) alussa, projektille, joka alkaa tallennetuista tiedoista: tiedosto, sellaisena kuin Emulaattori > Vie tallennustiedot... sen kirjoittaa (eeprom.bin), tai uzemin oma eeprom.bin. Jokainen peli jakaa yhden EEPROMin, kukin omassa lohkossaan. Tiedostoa ei koskaan muuteta. Jätä tyhjäksi, jos haluat aloittaa tyhjällä EEPROMilla.",
+		"slot.savedata.name_help": "EEPROM-tiedosto tunnistetaan päätteestään, .bin."
+	}
+}

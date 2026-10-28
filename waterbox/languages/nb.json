@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "en linje begynner ikke med ':'",
+		"error.hex_digits": "en linje er ikke heksadesimale siffer",
+		"error.hex_empty": "den inneholder ikke noe program",
+		"error.hex_past_flash": "en linje skriver forbi de 64 KB flashminnet",
+		"error.hex_short": "en linje er ikke heksadesimale siffer, eller er for kort",
+		"error.no_file": "Ingen spillfil er i prosjektet.",
+		"error.not_game": "'%1' er ikke et Uzebox-spill: den er verken en .uze-fil eller et .hex-program.",
+		"error.not_hex": "'%1' kunne ikke lastes som et .hex-program: %2",
+		"error.not_read": "Spillet '%1' kunne ikke leses.",
+		"error.not_uze": "'%1' kunne ikke lastes som et .uze-spill. Det kan være for Uzebox 2.0, som uzem ikke kjører.",
+		"setting.p1controller": "Kontroller 1",
+		"setting.p1controller.about": "Hva som er koblet til den første kontrollerporten: en SNES-gamepad eller en SNES-mus. 'auto' gjør det filen til spillet ber om: en .uze-fil kan si at den vil ha musen, slik uzem leser den; en .hex-fil kan ikke det, og får gamepaden. Den er en del av maskinen, så en filmfil trenger samme verdi.",
+		"setting.randomseed": "Startverdi for tilfeldige tall",
+		"setting.randomseed.about": "Når konsollen starter, bruker kjernen tidtakeren for vaktbikkjen til å lage en startverdi for tilfeldige tall for spill. På den virkelige konsollen driver den tidtakeren; uzem legger til en tilfeldig drift av sin egen, som dette tallet starter. Et annet tall kan gi spillet andre tilfeldige tall. Den er en del av maskinen, så en filmfil trenger samme verdi.",
+		"slot.game": "Spill",
+		"slot.game.help": "Uzebox-spillet: en .uze-fil (programmet med en topptekst som sier hva det heter), eller et .hex-program slik Uzeboxens kompilator skriver det.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "Konsollens EEPROM (2 KB, der spill lagrer poengene og lagrede spill) ved start, for et prosjekt som begynner fra lagrede data: en fil slik Emulator > Eksporter lagrede data... skriver den (eeprom.bin), eller uzems egen eeprom.bin. Alle spill deler den ene EEPROM-en, hvert i sin egen blokk. Filen endres aldri. La dette stå tomt for å starte med en tom EEPROM.",
+		"slot.savedata.name_help": "en EEPROM-fil kjennes igjen på filendelsen, .bin."
+	}
+}

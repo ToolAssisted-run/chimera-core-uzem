@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "een regel begint niet met ':'",
+		"error.hex_digits": "een regel bestaat niet uit hexadecimale cijfers",
+		"error.hex_empty": "er staat geen programma in",
+		"error.hex_past_flash": "een regel schrijft voorbij de 64 KB flash",
+		"error.hex_short": "een regel is geen hexadecimale cijfers, of is te kort",
+		"error.no_file": "Er staat geen spelbestand in het project.",
+		"error.not_game": "'%1' is geen Uzebox-spel: het is geen .uze-bestand en ook geen .hex-programma.",
+		"error.not_hex": "'%1' kon niet als .hex-programma worden geladen: %2",
+		"error.not_read": "Het spel '%1' kon niet worden gelezen.",
+		"error.not_uze": "'%1' kon niet als .uze-spel worden geladen. Het is misschien voor de Uzebox 2.0, die uzem niet draait.",
+		"setting.p1controller": "Controller van P1",
+		"setting.p1controller.about": "Wat op de eerste controlleraansluiting is aangesloten: een SNES-gamepad of een SNES-muis. 'auto' doet wat het bestand van het spel vraagt: een .uze-bestand kan zeggen dat het de muis wil, zoals uzem het leest; een .hex-bestand kan dat niet en krijgt de gamepad. Het hoort bij de machine, dus een movie heeft dezelfde waarde nodig.",
+		"setting.randomseed": "Startgetal voor willekeurige getallen",
+		"setting.randomseed.about": "Wanneer de console start, gebruikt de kernel zijn watchdog-timer om een startgetal voor spellen te maken. Op de echte console loopt die timer af; uzem voegt een eigen willekeurige afwijking toe, waarmee dit getal start. Een ander getal kan een spel andere willekeurige getallen geven. Het hoort bij de machine, dus een movie heeft dezelfde waarde nodig.",
+		"slot.game": "Spel",
+		"slot.game.help": "Het Uzebox-spel: een .uze-bestand (het programma met een kop die het benoemt), of een .hex-programma zoals de compiler van de Uzebox het schrijft.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "De EEPROM van de console (2 KB, waar spellen hun highscores en opgeslagen spellen bewaren) bij de start, voor een project dat begint met opgeslagen gegevens: een bestand zoals Emulator > Export Save Data... het schrijft (eeprom.bin), of het eigen eeprom.bin van uzem. Elk spel deelt de ene EEPROM, elk in een eigen blok. Het bestand wordt nooit veranderd. Laat dit leeg om met een lege EEPROM te beginnen.",
+		"slot.savedata.name_help": "een EEPROM-bestand wordt herkend aan zijn extensie, .bin."
+	}
+}

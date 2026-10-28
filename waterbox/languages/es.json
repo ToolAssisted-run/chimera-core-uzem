@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "una línea no empieza por ':'",
+		"error.hex_digits": "una línea no son dígitos hexadecimales",
+		"error.hex_empty": "no contiene ningún programa",
+		"error.hex_past_flash": "una línea escribe más allá de los 64 KB de la memoria flash",
+		"error.hex_short": "una línea no son dígitos hexadecimales, o es demasiado corta",
+		"error.no_file": "No hay ningún archivo de juego en el proyecto.",
+		"error.not_game": "'%1' no es un juego de Uzebox: no es un archivo .uze ni un programa .hex.",
+		"error.not_hex": "'%1' no se pudo cargar como programa .hex: %2",
+		"error.not_read": "No se pudo leer el juego '%1'.",
+		"error.not_uze": "'%1' no se pudo cargar como juego .uze. Puede ser para la Uzebox 2.0, que uzem no ejecuta.",
+		"setting.p1controller": "Mando de P1",
+		"setting.p1controller.about": "Lo que va conectado al primer puerto de mando: un gamepad de SNES o un ratón de SNES. 'auto' hace lo que pide el archivo del juego: un archivo .uze puede decir que quiere el ratón, tal como lo lee uzem; un archivo .hex no puede, y recibe el gamepad. Forma parte de la máquina, así que una película necesita el mismo valor.",
+		"setting.randomseed": "Semilla aleatoria",
+		"setting.randomseed.about": "Al arrancar la consola, el sistema mide con su temporizador de vigilancia una semilla aleatoria para los juegos. En la consola real ese temporizador se desvía; uzem le añade una desviación aleatoria propia, que este número inicia. Un número distinto puede dar a un juego otros números aleatorios. Forma parte de la máquina, así que una película necesita el mismo valor.",
+		"slot.game": "Juego",
+		"slot.game.help": "El juego de Uzebox: un archivo .uze (el programa con una cabecera que le pone nombre), o un programa .hex tal como lo escribe el compilador de Uzebox.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "La EEPROM de la consola (2 KB, donde los juegos guardan las puntuaciones altas y las partidas) al empezar, para un proyecto que parte de datos guardados: un archivo que escribe Emulador > Exportar datos de guardado... (eeprom.bin), o el eeprom.bin propio de uzem. Todos los juegos comparten la misma EEPROM, cada uno en un bloque propio. El archivo nunca se cambia. Deja esto vacío para empezar con una EEPROM en blanco.",
+		"slot.savedata.name_help": "un archivo EEPROM se reconoce por su extensión, .bin."
+	}
+}

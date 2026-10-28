@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "en rad börjar inte med ':'",
+		"error.hex_digits": "en rad är inte hexadecimala siffror",
+		"error.hex_empty": "det finns inget program i den",
+		"error.hex_past_flash": "en rad skriver förbi de 64 KB flashminne",
+		"error.hex_short": "en rad är inte hexadecimala siffror, eller är för kort",
+		"error.no_file": "Ingen spelfil finns i projektet.",
+		"error.not_game": "'%1' är inte ett Uzebox-spel: det är varken en .uze-fil eller ett .hex-program.",
+		"error.not_hex": "'%1' kunde inte läsas in som ett .hex-program: %2",
+		"error.not_read": "Spelet '%1' kunde inte läsas.",
+		"error.not_uze": "'%1' kunde inte läsas in som ett .uze-spel. Det kan vara för Uzebox 2.0, som uzem inte kör.",
+		"setting.p1controller": "P1-kontroll",
+		"setting.p1controller.about": "Vad som är inkopplat i den första kontrollporten: en SNES-gamepad eller en SNES-mus. 'auto' gör vad spelets fil begär: en .uze-fil kan säga att den vill ha musen, så som uzem läser den; en .hex-fil kan inte det, och får gamepaden. Den hör till maskinen, så en inspelning behöver samma värde.",
+		"setting.randomseed": "Slumpfrö",
+		"setting.randomseed.about": "När konsolen startar tidsätter kärnan dess vakthund för att skapa ett slumpfrö till spelen. På den riktiga konsolen driver den timern; uzem lägger till en egen slumpmässig drift, som det här talet startar. Ett annat tal kan ge ett spel andra slumptal. Den hör till maskinen, så en inspelning behöver samma värde.",
+		"slot.game": "Spel",
+		"slot.game.help": "Uzebox-spelet: en .uze-fil (programmet med ett huvud som anger dess namn), eller ett .hex-program så som Uzeboxens kompilator skriver det.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "Konsolens EEPROM (2 KB, där spel sparar highscore och sparade spel) vid start, för ett projekt som börjar från sparad data: en fil så som Emulator > Exportera sparad data... skriver den (eeprom.bin), eller uzems egen eeprom.bin. Alla spel delar på ett och samma EEPROM, var och en i ett block för sig. Filen ändras aldrig. Lämna det tomt för att starta med ett tomt EEPROM.",
+		"slot.savedata.name_help": "en EEPROM-fil känns igen på sin ändelse, .bin."
+	}
+}

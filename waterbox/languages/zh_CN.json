@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "某一行没有以“:”开头",
+		"error.hex_digits": "某一行不是十六进制数字",
+		"error.hex_empty": "其中没有程序",
+		"error.hex_past_flash": "某一行写入超出了 64 KB 闪存的范围",
+		"error.hex_short": "某一行不是十六进制数字，或长度不足",
+		"error.no_file": "项目中没有游戏文件。",
+		"error.not_game": "“%1”不是 Uzebox 游戏：它既不是 .uze 文件，也不是 .hex 程序。",
+		"error.not_hex": "无法将“%1”作为 .hex 程序加载：%2",
+		"error.not_read": "无法读取游戏“%1”。",
+		"error.not_uze": "无法将“%1”作为 .uze 游戏加载。它可能是为 Uzebox 2.0 制作的，而 uzem 无法运行它。",
+		"setting.p1controller": "P1 控制器",
+		"setting.p1controller.about": "插在第一个控制器端口上的设备：SNES 手柄或 SNES 鼠标。“auto”会按照游戏文件的要求进行：.uze 文件可以声明它需要鼠标，uzem 会读取这一声明；.hex 文件无法声明，因此使用手柄。它属于机型的一部分，因此录像需要相同的值。",
+		"setting.randomseed": "随机种子",
+		"setting.randomseed.about": "主机启动时，内核通过看门狗定时器计时，以生成供游戏使用的随机种子。在真实主机上，该定时器会有漂移；uzem 会加入它自己的随机漂移，而此数字就是漂移的起点。不同的数字可以让游戏获得不同的随机数。它属于机型的一部分，因此录像需要相同的值。",
+		"slot.game": "游戏",
+		"slot.game.help": "Uzebox 游戏：一个 .uze 文件（即带有写明其名称的头部的程序），或 Uzebox 编译器所写出的 .hex 程序。",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "主机的 EEPROM（2 KB，游戏用来保存最高分和已保存的游戏）在开始时的内容，供从已保存数据开始的项目使用：由“模拟器 > 导出存档数据...”写出的文件（eeprom.bin），或 uzem 自己的 eeprom.bin。所有游戏共用同一个 EEPROM，每个游戏占用其中一块。该文件从不会被改动。留空则以空白 EEPROM 开始。",
+		"slot.savedata.name_help": "EEPROM 文件通过其扩展名 .bin 识别。"
+	}
+}

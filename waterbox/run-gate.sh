@@ -296,11 +296,11 @@ check "uze:sandbox-mouse" "with the mouse moved and clicked, native, sandbox and
 mkdir -p "$work/none"
 printf '{"game":[]}' > "$work/none/slots"; printf '{}' > "$work/none/settings"
 nat none none --frames 1
-check "refused:no-game" "a machine with no game is refused, and says so" grep -q "Init failed.*no game was given" "$work/none.out" "$work/none.err"
+check "refused:no-game" "a machine with no game is refused, and says so" grep -q "Init failed.*error.no_file" "$work/none.out" "$work/none.err"
 printf 'not a game' > "$work/junk.uze"
 folder junk '{}' "$work/junk.uze"
 nat junk junk --frames 1
-check "refused:not-a-game" "a file that is not a game is refused, and says so" grep -q "Init failed.*not an Uzebox game" "$work/junk.out" "$work/junk.err"
+check "refused:not-a-game" "a file that is not a game is refused, and says so" grep -q "Init failed.*error.not_game" "$work/junk.out" "$work/junk.err"
 python3 - "$progs/testprog.uze" "$work/big.uze" "$work/uz2.uze" <<'PY'
 import sys
 d = bytearray(open(sys.argv[1], "rb").read())
@@ -312,7 +312,7 @@ PY
 folder big '{}' "$work/big.uze"; nat big big --frames 1
 folder uz2 '{}' "$work/uz2.uze"; nat uz2 uz2 --frames 1
 check "refused:bad-uze" "a .uze file whose header says its program is larger than the flash, and one for the Uzebox 2.0, are refused, and say so" \
-	sh -c "grep -q 'Init failed.*could not be loaded as a .uze' '$work/big.out' '$work/big.err' && grep -q 'Init failed.*could not be loaded as a .uze' '$work/uz2.out' '$work/uz2.err'"
+	sh -c "grep -q 'Init failed.*error.not_uze' '$work/big.out' '$work/big.err' && grep -q 'Init failed.*error.not_uze' '$work/uz2.out' '$work/uz2.err'"
 printf ':10000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00\n:00000001FF\n' > "$work/bad.hex"
 folder bad '{}' "$work/bad.hex"
 nat bad bad --frames 60 --report 60

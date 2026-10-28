@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "bir satır ':' ile başlamıyor",
+		"error.hex_digits": "bir satır onaltılık rakamlardan oluşmuyor",
+		"error.hex_empty": "hiç program içermiyor",
+		"error.hex_past_flash": "bir satır 64 KB flash'ın ötesine yazıyor",
+		"error.hex_short": "bir satır onaltılık rakamlardan oluşmuyor ya da çok kısa",
+		"error.no_file": "Projede oyun dosyası yok.",
+		"error.not_game": "'%1' bir Uzebox oyunu değil: ne bir .uze dosyası ne de bir .hex programı.",
+		"error.not_hex": "'%1' bir .hex programı olarak yüklenemedi: %2",
+		"error.not_read": "'%1' oyunu okunamadı.",
+		"error.not_uze": "'%1' bir .uze oyunu olarak yüklenemedi. Uzebox 2.0 için olabilir; uzem bunu çalıştırmaz.",
+		"setting.p1controller": "1. Kumanda",
+		"setting.p1controller.about": "İlk kumanda portuna ne takılı: bir SNES oyun pedi ya da bir SNES faresi. 'auto', oyunun dosyasının istediğini yapar: bir .uze dosyası fare istediğini belirtebilir, uzem bunu okur; bir .hex dosyası bunu yapamaz ve ped alır. Makinenin bir parçasıdır, bu yüzden bir film aynı değeri ister.",
+		"setting.randomseed": "Rastgele Tohum",
+		"setting.randomseed.about": "Konsol başladığında Uzebox yazılımı, bekçi zamanlayıcısını (watchdog) ölçerek oyunlar için bir rastgele tohum üretir. Gerçek konsolda bu zamanlayıcı kayar; uzem kendi rastgele kaymasını ekler ve bu sayı onu başlatır. Farklı bir sayı bir oyuna farklı rastgele sayılar verebilir. Makinenin bir parçasıdır, bu yüzden bir film aynı değeri ister.",
+		"slot.game": "Oyun",
+		"slot.game.help": "Uzebox oyunu: bir .uze dosyası (adını belirten bir başlıklı program) ya da Uzebox'ın derleyicisinin yazdığı bir .hex programı.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "Konsolun EEPROM'u (2 KB; oyunların yüksek skorlarını ve kayıtlı oyunlarını tuttuğu yer) başlangıçta, kayıtlı veriden başlayan proje için: Emulator > Export Save Data... ile yazılan bir dosya (eeprom.bin) ya da uzem'in kendi eeprom.bin'i. Her oyun tek EEPROM'u paylaşır, her biri kendi bloğunda. Dosya asla değiştirilmez. Boş bir EEPROM ile başlamak için bunu boş bırakın.",
+		"slot.savedata.name_help": "Bir EEPROM dosyası uzantısıyla tanınır: .bin."
+	}
+}

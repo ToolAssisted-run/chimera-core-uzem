@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "une ligne ne commence pas par ':'",
+		"error.hex_digits": "une ligne ne contient pas de chiffres hexadécimaux",
+		"error.hex_empty": "il ne contient aucun programme",
+		"error.hex_past_flash": "une ligne écrit au-delà des 64 Ko de flash",
+		"error.hex_short": "une ligne ne contient pas de chiffres hexadécimaux, ou est trop courte",
+		"error.no_file": "Aucun fichier de jeu n'est dans le projet.",
+		"error.not_game": "'%1' n'est pas un jeu Uzebox : ce n'est ni un fichier .uze ni un programme .hex.",
+		"error.not_hex": "'%1' n'a pas pu être chargé comme programme .hex : %2",
+		"error.not_read": "Le jeu '%1' n'a pas pu être lu.",
+		"error.not_uze": "'%1' n'a pas pu être chargé comme jeu .uze. Il est peut-être pour l'Uzebox 2.0, que uzem ne fait pas tourner.",
+		"setting.p1controller": "Manette du P1",
+		"setting.p1controller.about": "Ce qui est branché au premier port de manette : une manette SNES ou une souris SNES. 'auto' fait ce que demande le fichier du jeu : un fichier .uze peut indiquer qu'il veut la souris, comme uzem le lit ; un fichier .hex ne le peut pas et reçoit la manette. Il fait partie de la machine : un film a besoin de la même valeur.",
+		"setting.randomseed": "Graine aléatoire",
+		"setting.randomseed.about": "Au démarrage de la console, le noyau règle son chronomètre de surveillance pour en tirer une graine aléatoire pour les jeux. Sur la vraie console, ce chronomètre dérive ; uzem y ajoute une dérive aléatoire qui lui est propre, et ce nombre en est le point de départ. Un autre nombre peut donner d'autres nombres aléatoires au jeu. Il fait partie de la machine : un film a besoin de la même valeur.",
+		"slot.game": "Jeu",
+		"slot.game.help": "Le jeu Uzebox : un fichier .uze (le programme avec un en-tête qui le nomme), ou un programme .hex tel que l'écrit le compilateur de l'Uzebox.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "L'EEPROM de la console (2 Ko, où les jeux gardent les meilleurs scores et les parties sauvegardées) au départ, pour un projet qui part de données sauvegardées : un fichier tel que l'écrit Émulateur > Exporter les données de sauvegarde... (eeprom.bin), ou le eeprom.bin propre à uzem. Tous les jeux partagent la même EEPROM, chacun dans un bloc à lui. Le fichier n'est jamais modifié. Laissez ce champ vide pour démarrer avec une EEPROM vierge.",
+		"slot.savedata.name_help": "un fichier EEPROM est reconnu à son extension, .bin."
+	}
+}

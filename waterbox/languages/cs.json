@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "řádek nezačíná znakem ':'",
+		"error.hex_digits": "řádek nejsou hexadecimální číslice",
+		"error.hex_empty": "nedrží žádný program",
+		"error.hex_past_flash": "řádek zapisuje za 64 KB flash",
+		"error.hex_short": "řádek nejsou hexadecimální číslice, nebo je příliš krátký",
+		"error.no_file": "V projektu není soubor hry.",
+		"error.not_game": "„%1“ není hra Uzebox: není ani soubor .uze, ani program .hex.",
+		"error.not_hex": "„%1“ se nepodařilo načíst jako program .hex: %2",
+		"error.not_read": "Hru „%1“ se nepodařilo přečíst.",
+		"error.not_uze": "„%1“ se nepodařilo načíst jako hru .uze. Může být pro Uzebox 2.0, který uzem nespouští.",
+		"setting.p1controller": "Ovladač P1",
+		"setting.p1controller.about": "Co je zapojeno do prvního portu ovladače: podložka SNES, nebo myš SNES. „auto“ udělá to, co žádá soubor hry: soubor .uze může říct, že chce myš, jak ho čte uzem; soubor .hex to neumí a dostane podložku. Je součástí stroje, takže film potřebuje stejnou hodnotu.",
+		"setting.randomseed": "Semínko náhodných čísel",
+		"setting.randomseed.about": "Když konzole startuje, jádro časuje svůj hlídací časovač, aby z něj udělalo náhodné semínko pro hry. Na skutečné konzoli se ten časovač odchyluje; uzem přidá vlastní náhodnou odchylku, kterou toto číslo spustí. Jiné číslo může dát hře jiná náhodná čísla. Je součástí stroje, takže film potřebuje stejnou hodnotu.",
+		"slot.game": "Hra",
+		"slot.game.help": "Hra Uzebox: soubor .uze (program s hlavičkou, která ho pojmenovává), nebo program .hex, jak ho zapisuje kompilátor Uzebox.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "EEPROM konzole (2 KB, kde hry drží nejlepší skóre a uložené hry) na začátku, pro projekt, který začíná z uložených dat: soubor, jak ho zapisuje Emulator > Export Save Data... (eeprom.bin), nebo vlastní eeprom.bin uzem. Každá hra sdílí jednu EEPROM, každá ve vlastním bloku. Soubor se nikdy nemění. Nech prázdné, chceš-li začít s prázdnou EEPROM.",
+		"slot.savedata.name_help": "Soubor EEPROM se pozná podle přípony .bin."
+	}
+}

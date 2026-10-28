@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "行が ':' で始まっていません",
+		"error.hex_digits": "行が16進数の桁ではありません",
+		"error.hex_empty": "プログラムが入っていません",
+		"error.hex_past_flash": "行が64 KBのフラッシュを超えて書き込みます",
+		"error.hex_short": "行が16進数の桁ではないか、短すぎます",
+		"error.no_file": "プロジェクトにゲームファイルがありません。",
+		"error.not_game": "'%1' はUzeboxのゲームではありません。.uze ファイルでも .hex プログラムでもありません。",
+		"error.not_hex": "'%1' は .hex プログラムとして読み込めませんでした: %2",
+		"error.not_read": "ゲーム '%1' を読み込めませんでした。",
+		"error.not_uze": "'%1' は .uze ゲームとして読み込めませんでした。uzemが動かさないUzebox 2.0用の可能性があります。",
+		"setting.p1controller": "P1 コントローラー",
+		"setting.p1controller.about": "最初のコントローラーポートに接続するもの: SNESのゲームパッドまたはSNESマウス。'auto' は、ゲームのファイルの要求どおりにします。.uze ファイルはマウスを要求できます(uzemはそれを読みます)。.hex ファイルはそれができず、ゲームパッドになります。機種の一部なので、ムービーには同じ値が必要です。",
+		"setting.randomseed": "乱数の種",
+		"setting.randomseed.about": "本体が起動すると、カーネルはウォッチドッグタイマーを使ってゲーム用の乱数の種を作ります。実機ではそのタイマーはずれていきます。uzemは独自のずれを加えます。この数値がその開始値です。別の数値にすると、ゲームは別の乱数を得ることがあります。機種の一部なので、ムービーには同じ値が必要です。",
+		"slot.game": "ゲーム",
+		"slot.game.help": "Uzeboxのゲーム: .uze ファイル(ゲームの名前を含むヘッダー付きのプログラム)、またはUzeboxのコンパイラが書き出す .hex プログラム。",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "開始時点での本体のEEPROM(2 KB。ゲームがハイスコアやセーブを保存する場所)。セーブデータから始まるプロジェクトのためのものです。「セーブデータを書き出す」が書き出すファイル(eeprom.bin)、またはuzem自身の eeprom.bin です。すべてのゲームが1つのEEPROMを共有し、それぞれ専用のブロックを持ちます。ファイルは変更されません。空のままにすると、EEPROMは白紙で始まります。",
+		"slot.savedata.name_help": "EEPROMのファイルは、拡張子 .bin で識別されます。"
+	}
+}

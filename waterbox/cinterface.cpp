@@ -23,6 +23,11 @@
 #include "uzerom.h"
 
 // ---- what went wrong, for Chimera to show ----------------------------------
+/* A text a person reads is a key of languages/en.json, each of its
+ * arguments after a TEXT_ARG (chimera docs/translations.md). TEXT_ARG is a
+ * string of its own so the byte after it is never read as more of its hex. */
+#define TEXT_ARG "\x1f"
+
 static char g_loadError[512];
 
 // ---- the machine -------------------------------------------------------------
@@ -338,23 +343,23 @@ static const char *load_hex(const char *text, long size, unsigned char *flash)
 		if (lineEnd > p)
 		{
 			if (*p != ':')
-				return "a line does not start with ':'";
+				return "error.hex_colon";
 			const int count = hex_byte(p + 1, lineEnd), hi = hex_byte(p + 3, lineEnd),
 				lo = hex_byte(p + 5, lineEnd), type = hex_byte(p + 7, lineEnd);
 			if (count < 0 || hi < 0 || lo < 0 || type < 0 || lineEnd - p < 11 + 2 * count)
-				return "a line is not hex digits, or is too short";
+				return "error.hex_short";
 			if (type == 1)
-				return any ? nullptr : "it holds no program";
+				return any ? nullptr : "error.hex_empty";
 			if (type == 0)
 			{
 				const unsigned addr = (unsigned)(hi << 8 | lo);
 				if (addr + (unsigned)count > progSize)
-					return "a line writes past the 64 KB of flash";
+					return "error.hex_past_flash";
 				for (int i = 0; i < count; i++)
 				{
 					const int b = hex_byte(p + 9 + 2 * i, lineEnd);
 					if (b < 0)
-						return "a line is not hex digits";
+						return "error.hex_digits";
 					flash[addr + i] = (unsigned char)b;
 				}
 				any = true;
@@ -362,7 +367,7 @@ static const char *load_hex(const char *text, long size, unsigned char *flash)
 		}
 		p = eol ? eol + 1 : end;
 	}
-	return any ? nullptr : "it holds no program";
+	return any ? nullptr : "error.hex_empty";
 }
 
 static int setting_str(const char *name, char *out, int size)
@@ -404,14 +409,14 @@ ECL_EXPORT int Init(void)
 	}
 	if (!g_gameName[0])
 	{
-		snprintf(g_loadError, sizeof g_loadError, "no game was given");
+		snprintf(g_loadError, sizeof g_loadError, "error.no_file");
 		return 0;
 	}
 	long size = 0;
 	unsigned char *data = (unsigned char *)read_file(g_gameName, &size);
 	if (!data)
 	{
-		snprintf(g_loadError, sizeof g_loadError, "the game %s could not be read", g_gameName);
+		snprintf(g_loadError, sizeof g_loadError, "error.not_read" TEXT_ARG "%s", g_gameName);
 		return 0;
 	}
 	// the program: a .uze file is a 512-byte header and the program, and is
@@ -429,7 +434,7 @@ ECL_EXPORT int Init(void)
 		free(data);
 		if (progBytes > progSize || !loadUzeImage(g_gameName, &g_header, flash))
 		{
-			snprintf(g_loadError, sizeof g_loadError, "%s could not be loaded as a .uze game (it may be for the Uzebox 2.0, which uzem does not run)", g_gameName);
+			snprintf(g_loadError, sizeof g_loadError, "error.not_uze" TEXT_ARG "%s", g_gameName);
 			return 0;
 		}
 	}
@@ -439,14 +444,14 @@ ECL_EXPORT int Init(void)
 		free(data);
 		if (error)
 		{
-			snprintf(g_loadError, sizeof g_loadError, "%s could not be loaded as a .hex program: %s", g_gameName, error);
+			snprintf(g_loadError, sizeof g_loadError, "error.not_hex" TEXT_ARG "%s" TEXT_ARG "%s", g_gameName, error);
 			return 0;
 		}
 	}
 	else
 	{
 		free(data);
-		snprintf(g_loadError, sizeof g_loadError, "%s is not an Uzebox game: neither a .uze file nor a .hex program", g_gameName);
+		snprintf(g_loadError, sizeof g_loadError, "error.not_game" TEXT_ARG "%s", g_gameName);
 		return 0;
 	}
 	g_uzebox.decodeFlash();

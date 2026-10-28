@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "a line does not start with ':'",
+		"error.hex_digits": "a line is not hex digits",
+		"error.hex_empty": "it holds no program",
+		"error.hex_past_flash": "a line writes past the 64 KB of flash",
+		"error.hex_short": "a line is not hex digits, or is too short",
+		"error.no_file": "No game file is in the project.",
+		"error.not_game": "'%1' is not an Uzebox game: it is neither a .uze file nor a .hex program.",
+		"error.not_hex": "'%1' could not be loaded as a .hex program: %2",
+		"error.not_read": "The game '%1' could not be read.",
+		"error.not_uze": "'%1' could not be loaded as a .uze game. It may be for the Uzebox 2.0, which uzem does not run.",
+		"setting.p1controller": "P1 Controller",
+		"setting.p1controller.about": "What is plugged into the first controller port: a SNES gamepad or a SNES mouse. 'auto' does what the game's file asks for: a .uze file can say it wants the mouse, as uzem reads it; a .hex file cannot, and gets the gamepad. It is part of the machine, so a movie needs the same value.",
+		"setting.randomseed": "Random Seed",
+		"setting.randomseed.about": "When the console starts, the kernel times its watchdog timer to make a random seed for games. On the real console that timer drifts; uzem adds a random drift of its own, which this number starts. A different number can give a game other random numbers. It is part of the machine, so a movie needs the same value.",
+		"slot.game": "Game",
+		"slot.game.help": "The Uzebox game: a .uze file (the program with a header that names it), or a .hex program as the Uzebox's compiler writes it.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "The console's EEPROM (2 KB, where games keep high scores and saved games) at the start, for a project that begins from saved data: a file as Emulator > Export Save Data... writes it (eeprom.bin), or uzem's own eeprom.bin. Every game shares the one EEPROM, each in a block of its own. The file is never changed. Leave this empty to start with a blank EEPROM.",
+		"slot.savedata.name_help": "an EEPROM file is identified by its extension, .bin."
+	}
+}

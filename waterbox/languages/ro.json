@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "o linie nu începe cu „:”",
+		"error.hex_digits": "o linie nu sunt cifre hexazecimale",
+		"error.hex_empty": "nu ține niciun program",
+		"error.hex_past_flash": "o linie scrie dincolo de cele 64 KB de flash",
+		"error.hex_short": "o linie nu sunt cifre hexazecimale, sau este prea scurtă",
+		"error.no_file": "Niciun fișier de joc nu este în proiect.",
+		"error.not_game": "„%1” nu este un joc Uzebox: nu este nici un fișier .uze, nici un program .hex.",
+		"error.not_hex": "„%1” nu a putut fi încărcat ca program .hex: %2",
+		"error.not_read": "Jocul „%1” nu a putut fi citit.",
+		"error.not_uze": "„%1” nu a putut fi încărcat ca joc .uze. Poate fi pentru Uzebox 2.0, pe care uzem nu îl rulează.",
+		"setting.p1controller": "Controlerul P1",
+		"setting.p1controller.about": "Ce este conectat la primul port de control: un pad SNES sau un mouse SNES. „auto” face ce cere fișierul jocului: un fișier .uze poate spune că vrea mouse-ul, cum îl citește uzem; un fișier .hex nu poate, și primește padul. Face parte din mașină, deci o înregistrare are nevoie de aceeași valoare.",
+		"setting.randomseed": "Sămânța numerelor aleatoare",
+		"setting.randomseed.about": "Când pornește consola, nucleul își cronometrează cronometrul de siguranță pentru a face o sămânță aleatoare pentru jocuri. Pe consola reală cronometrul acela se abate; uzem adaugă o abatere aleatoare proprie, pe care o pornește acest număr. Un alt număr poate da jocului alte numere aleatoare. Face parte din mașină, deci o înregistrare are nevoie de aceeași valoare.",
+		"slot.game": "Joc",
+		"slot.game.help": "Jocul Uzebox: un fișier .uze (programul cu un antet care îi dă numele), sau un program .hex cum îl scrie compilatorul Uzebox.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "EEPROM-ul consolei (2 KB, unde jocurile își țin scorurile cele mai bune și jocurile salvate) la început, pentru un proiect care începe de la date salvate: un fișier scris de Emulator > Export Save Data... (eeprom.bin), sau eeprom.bin propriu al uzem. Fiecare joc împarte același EEPROM, fiecare într-un bloc al său. Fișierul nu este schimbat niciodată. Lasă gol ca să pornești cu un EEPROM gol.",
+		"slot.savedata.name_help": "un fișier EEPROM se recunoaște după extensia lui, .bin."
+	}
+}

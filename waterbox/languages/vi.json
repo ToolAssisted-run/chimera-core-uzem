@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "một dòng không bắt đầu bằng ':'",
+		"error.hex_digits": "một dòng không phải là các chữ số thập lục phân",
+		"error.hex_empty": "nó không chứa chương trình nào",
+		"error.hex_past_flash": "một dòng ghi vượt quá 64 KB flash",
+		"error.hex_short": "một dòng không phải là các chữ số thập lục phân, hoặc quá ngắn",
+		"error.no_file": "Không có tệp trò chơi nào trong dự án.",
+		"error.not_game": "'%1' không phải là trò chơi Uzebox: nó không phải tệp .uze cũng không phải chương trình .hex.",
+		"error.not_hex": "Không tải được '%1' như một chương trình .hex: %2",
+		"error.not_read": "Không đọc được trò chơi '%1'.",
+		"error.not_uze": "Không tải được '%1' như một trò chơi .uze. Nó có thể dành cho Uzebox 2.0, mà uzem không chạy.",
+		"setting.p1controller": "Tay cầm P1",
+		"setting.p1controller.about": "Thứ gì được cắm vào cổng tay cầm đầu tiên: một tay cầm SNES hoặc một chuột SNES. 'auto' làm theo yêu cầu trong tệp của trò chơi: một tệp .uze có thể nói rằng nó muốn chuột, như uzem đọc nó; một tệp .hex thì không, và nhận tay cầm. Đây là một phần của máy, nên một bản ghi cần cùng giá trị.",
+		"setting.randomseed": "Hạt giống ngẫu nhiên",
+		"setting.randomseed.about": "Khi máy khởi động, nhân (kernel) đặt thời gian cho bộ đếm giám sát của nó để tạo hạt giống ngẫu nhiên cho các trò chơi. Trên máy chơi game thật, bộ đếm đó trôi dạt; uzem thêm một độ trôi ngẫu nhiên riêng, và con số này là điểm bắt đầu của nó. Số khác có thể cho một trò chơi số ngẫu nhiên khác. Đây là một phần của máy, nên một bản ghi cần cùng giá trị.",
+		"slot.game": "Trò chơi",
+		"slot.game.help": "Trò chơi Uzebox: một tệp .uze (chương trình có phần đầu ghi tên nó), hoặc một chương trình .hex như trình biên dịch của Uzebox ghi ra.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "EEPROM của máy chơi game (2 KB, nơi các trò chơi giữ điểm số cao và lần lưu) khi bắt đầu, cho một dự án bắt đầu từ dữ liệu đã lưu: một tệp như Emulator > Export Save Data... ghi ra (eeprom.bin), hoặc eeprom.bin riêng của uzem. Mọi trò chơi dùng chung một EEPROM, mỗi trò trong một khối riêng. Tệp không bao giờ bị thay đổi. Để trống để bắt đầu với EEPROM trắng.",
+		"slot.savedata.name_help": "một tệp EEPROM được nhận biết qua phần mở rộng của nó, .bin."
+	}
+}

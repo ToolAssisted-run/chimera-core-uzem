@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "sebuah baris tidak dimulai dengan ':'",
+		"error.hex_digits": "sebuah baris bukan digit heksadesimal",
+		"error.hex_empty": "tidak berisi program",
+		"error.hex_past_flash": "sebuah baris menulis melewati 64 KB flash",
+		"error.hex_short": "sebuah baris bukan digit heksadesimal, atau terlalu pendek",
+		"error.no_file": "Tidak ada file game dalam proyek.",
+		"error.not_game": "'%1' bukan game Uzebox: ia bukan file .uze maupun program .hex.",
+		"error.not_hex": "'%1' tidak dapat dimuat sebagai program .hex: %2",
+		"error.not_read": "Game '%1' tidak dapat dibaca.",
+		"error.not_uze": "'%1' tidak dapat dimuat sebagai game .uze. Mungkin untuk Uzebox 2.0, yang tidak dijalankan uzem.",
+		"setting.p1controller": "Pengontrol P1",
+		"setting.p1controller.about": "Apa yang terpasang di port pengontrol pertama: pad SNES atau mouse SNES. 'auto' melakukan apa yang diminta file game: file .uze dapat menyatakan ingin memakai mouse, sebagaimana uzem membacanya; file .hex tidak dapat, dan mendapat pad. Ini bagian dari mesin, sehingga rekaman membutuhkan nilai yang sama.",
+		"setting.randomseed": "Angka Awal Acak",
+		"setting.randomseed.about": "Ketika konsol mulai, kernel mengatur timer watchdog-nya untuk membuat angka awal acak bagi game. Pada konsol sungguhan timer itu bergeser; uzem menambahkan pergeseran acaknya sendiri, yang dimulai dari angka ini. Angka lain dapat memberi game bilangan acak yang berbeda. Ini bagian dari mesin, sehingga rekaman membutuhkan nilai yang sama.",
+		"slot.game": "Game",
+		"slot.game.help": "Game Uzebox: file .uze (program dengan header yang menamainya), atau program .hex seperti yang ditulis kompilator Uzebox.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "EEPROM konsol (2 KB, tempat game menyimpan skor tinggi dan game tersimpan) pada awalnya, untuk proyek yang dimulai dari data tersimpan: file seperti yang ditulis Emulator > Ekspor Data Simpanan... (eeprom.bin), atau eeprom.bin milik uzem sendiri. Setiap game berbagi satu EEPROM yang sama, masing-masing dalam blok sendiri. File tidak pernah diubah. Biarkan kosong untuk memulai dengan EEPROM kosong.",
+		"slot.savedata.name_help": "file EEPROM dikenali dari ekstensinya, .bin."
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "egy sor nem „:”-tal kezdődik",
+		"error.hex_digits": "egy sor nem hexadecimális számjegyekből áll",
+		"error.hex_empty": "nem tartalmaz programot",
+		"error.hex_past_flash": "egy sor a 64 KB-os flash-en túl ír",
+		"error.hex_short": "egy sor nem hexadecimális számjegyekből áll, vagy túl rövid",
+		"error.no_file": "A projektben nincs játékfájl.",
+		"error.not_game": "„%1” nem Uzebox-játék: nem .uze fájl és nem .hex program.",
+		"error.not_hex": "„%1” nem tölthető be .hex programként: %2",
+		"error.not_read": "A(z) „%1” játék nem olvasható.",
+		"error.not_uze": "„%1” nem tölthető be .uze játékként. Lehet, hogy Uzebox 2.0-hoz készült, amelyet az uzem nem futtat.",
+		"setting.p1controller": "1. kontroller",
+		"setting.p1controller.about": "Mi van az első kontrollerportba dugva: SNES-gamepad vagy SNES-egér. Az „auto” azt teszi, amit a játék fájlja kér: a .uze fájl kérheti az egeret, ahogyan az uzem olvassa; a .hex fájl nem tudja, ezért gamepadet kap. A gép része, ezért a felvételhez ugyanez az érték kell.",
+		"setting.randomseed": "Véletlenszám-kezdőérték",
+		"setting.randomseed.about": "Amikor a konzol elindul, a kernel az óráját időzítőként használja, hogy véletlenszámot készítsen a játékoknak. A valódi konzolon ez az időzítő sodródik; az uzem saját véletlen sodródást ad hozzá, amelyet ez a szám indít. Más szám más véletlenszámokat adhat a játéknak. A gép része, ezért a felvételhez ugyanez az érték kell.",
+		"slot.game": "Játék",
+		"slot.game.help": "Az Uzebox-játék: egy .uze fájl (a program egy fejléccel, amely megnevezi), vagy egy .hex program, ahogyan az Uzebox fordítója írja.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "A konzol EEPROM-ja (2 KB, ahol a játékok a rekordjaikat és a mentéseiket tartják) indulásnál, olyan projektnél, amely mentett adatból indul: egy fájl, ahogyan az Emulátor > Mentési adatok exportálása... írja (eeprom.bin), vagy az uzem saját eeprom.bin fájlja. Minden játék ugyanazt az EEPROM-ot használja, mindegyik a saját blokkjában. A fájl sosem változik. Üresen hagyva üres EEPROM-mal indul.",
+		"slot.savedata.name_help": "az EEPROM-fájlt a kiterjesztése azonosítja: .bin."
+	}
+}

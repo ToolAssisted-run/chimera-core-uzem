@@ -1,0 +1,23 @@
+{
+	"texts": {
+		"error.hex_colon": "una línia no comença amb ':'",
+		"error.hex_digits": "una línia no són dígits hexadecimals",
+		"error.hex_empty": "no conté cap programa",
+		"error.hex_past_flash": "una línia escriu més enllà dels 64 KB de flash",
+		"error.hex_short": "una línia no són dígits hexadecimals, o és massa curta",
+		"error.no_file": "No hi ha cap fitxer de joc al projecte.",
+		"error.not_game": "'%1' no és un joc d'Uzebox: no és ni un fitxer .uze ni un programa .hex.",
+		"error.not_hex": "No s'ha pogut carregar '%1' com a programa .hex: %2",
+		"error.not_read": "No s'ha pogut llegir el joc '%1'.",
+		"error.not_uze": "No s'ha pogut carregar '%1' com a joc .uze. Pot ser per a l'Uzebox 2.0, que uzem no executa.",
+		"setting.p1controller": "Comandament P1",
+		"setting.p1controller.about": "Què està connectat al primer connector de comandament: un comandament de SNES o un ratolí de SNES. 'auto' fa el que demana el fitxer del joc: un fitxer .uze pot dir que vol el ratolí, tal com el llegeix uzem; un fitxer .hex no ho pot dir, i rep el comandament. Forma part de la màquina, així que una pel·lícula necessita el mateix valor.",
+		"setting.randomseed": "Llavor aleatòria",
+		"setting.randomseed.about": "Quan s'inicia la consola, el nucli calcula el seu temporitzador de vigilància per fer una llavor aleatòria per als jocs. A la consola real aquest temporitzador es desvia; uzem hi afegeix una desviació aleatòria pròpia, que aquest número inicia. Un número diferent pot donar als jocs uns altres nombres aleatoris. Forma part de la màquina, així que una pel·lícula necessita el mateix valor.",
+		"slot.game": "Joc",
+		"slot.game.help": "El joc de l'Uzebox: un fitxer .uze (el programa amb una capçalera que el nomena), o un programa .hex tal com l'escriu el compilador de l'Uzebox.",
+		"slot.savedata": "EEPROM",
+		"slot.savedata.help": "L'EEPROM de la consola (2 KB, on els jocs guarden les puntuacions i les partides desades) a l'inici, per a un projecte que comença des de dades desades: un fitxer tal com l'escriu Emulador > Exporta les dades desades... (eeprom.bin), o l'eeprom.bin propi d'uzem. Tots els jocs comparteixen la mateixa EEPROM, cadascun en un bloc propi. El fitxer mai no es canvia. Deixeu-ho buit per començar amb una EEPROM en blanc.",
+		"slot.savedata.name_help": "un fitxer d'EEPROM s'identifica per la seua extensió, .bin."
+	}
+}
